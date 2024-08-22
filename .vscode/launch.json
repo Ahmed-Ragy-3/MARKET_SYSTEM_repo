@@ -6,19 +6,24 @@
    "configurations": [
       {
          "type": "java",
+         "name": "DBIntegration",
+         "request": "launch",
+         "mainClass": "DBIntegration",
+         "projectName": "MARKET_SYSTEM_repo_91d8ec09"
+      },
+      {
+         "type": "java",
          "name": "Current File",
          "request": "launch",
          "mainClass": "${file}"
       },
-      // my addition
       {
          "type": "java",
          "name": "JavaFX Application",
          "request": "launch",
          "mainClass": "Item_GUI",
-         "vmArgs": "--module-path C:/VIP/market_system_project/javafx-sdk-22.0.2/lib --add-modules javafx.controls,javafx.fxml"
+         "vmArgs": "--module-path C:/VIP/MARKET_SYSTEM_repo/lib --add-modules javafx.controls,javafx.fxml"
       },
-      //////////////////////////////////////////////////////
       {
          "type": "java",
          "name": "Item",

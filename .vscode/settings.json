@@ -8,6 +8,7 @@
       "c:\\VIP\\javafx-sdk-22.0.2\\lib\\javafx.media.jar",
       "c:\\VIP\\javafx-sdk-22.0.2\\lib\\javafx.swing.jar",
       "c:\\VIP\\javafx-sdk-22.0.2\\lib\\javafx.web.jar",
-      "c:\\VIP\\javafx-sdk-22.0.2\\lib\\javafx-swt.jar"
+      "c:\\VIP\\javafx-sdk-22.0.2\\lib\\javafx-swt.jar",
+      "lib/ojdbc11.jar"
    ]
 }
