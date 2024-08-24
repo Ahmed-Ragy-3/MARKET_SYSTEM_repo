@@ -6,44 +6,19 @@
    "configurations": [
       {
          "type": "java",
-         "name": "DBIntegration",
+         "name": "Item_GUI",
          "request": "launch",
-         "mainClass": "DBIntegration",
+         "mainClass": "Item_GUI",
          "projectName": "MARKET_SYSTEM_repo_91d8ec09"
       },
       {
          "type": "java",
-         "name": "Current File",
-         "request": "launch",
-         "mainClass": "${file}"
-      },
-      {
-         "type": "java",
-         "name": "JavaFX Application",
+         "name": "Run Item_GUI",
          "request": "launch",
          "mainClass": "Item_GUI",
-         "vmArgs": "--module-path C:/VIP/MARKET_SYSTEM_repo/lib --add-modules javafx.controls,javafx.fxml"
-      },
-      {
-         "type": "java",
-         "name": "Item",
-         "request": "launch",
-         "mainClass": "Item",
-         "projectName": "market_system_project_ddc1df22"
-      },
-      {
-         "type": "java",
-         "name": "Item_GUI",
-         "request": "launch",
-         "mainClass": "Item_GUI",
-         "projectName": "market_system_project_ddc1df22"
-      },
-      {
-         "type": "java",
-         "name": "Runner",
-         "request": "launch",
-         "mainClass": "Runner",
-         "projectName": "market_system_project_ddc1df22"
+         "vmArgs": "--module-path C:/VIP/javafx-sdk-22.0.2/lib --add-modules javafx.controls,javafx.fxml",
+         "projectName": "MARKET_SYSTEM_repo"
       }
    ]
 }
+
