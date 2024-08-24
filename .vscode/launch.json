@@ -4,21 +4,26 @@
    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
    "version": "0.2.0",
    "configurations": [
+      // {
+      //    "type": "java",
+      //    "name": "Item_GUI",
+      //    "request": "launch",
+      //    "mainClass": "Item_GUI",
+      //    "projectName": "MARKET_SYSTEM_repo_91d8ec09"
+      // },
+      {
+         "type": "java",
+         "name": "Current File",
+         "request": "launch",
+         "mainClass": "${file}"
+      },
       {
          "type": "java",
          "name": "Item_GUI",
          "request": "launch",
          "mainClass": "Item_GUI",
-         "projectName": "MARKET_SYSTEM_repo_91d8ec09"
-      },
-      {
-         "type": "java",
-         "name": "Run Item_GUI",
-         "request": "launch",
-         "mainClass": "Item_GUI",
-         "vmArgs": "--module-path C:/VIP/javafx-sdk-22.0.2/lib --add-modules javafx.controls,javafx.fxml",
-         "projectName": "MARKET_SYSTEM_repo"
+         "projectName": "MARKET_SYSTEM_repo_91d8ec09",
+         "vmArgs": "--module-path \"C:\\VIP\\javafx-sdk-22.0.2\\lib\" --add-modules javafx.controls,javafx.fxml"
       }
    ]
 }
-
