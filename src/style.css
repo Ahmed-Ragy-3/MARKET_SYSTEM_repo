@@ -1,0 +1,49 @@
+/*
+Create all needed style classes for GUI Objects 
+Css Tutorial: https://www.w3schools.com/Css/default.asp
+Color wheel: https://www.canva.com/colors/color-wheel/?msockid=065c61157ede61032f3b72927fa26043
+Icons: https://www.flaticon.com/free-icons
+*/
+
+.fullscreen {
+   -fx-background-size: 2560px 1600px ;
+}
+
+.search_bar {
+   -fx-padding: 10px;
+   -fx-background-color: #ededd4;
+   -fx-background-radius: 20px;
+}
+
+.button-62 {
+   -fx-background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+   -fx-border: 0;
+   -fx-border-radius: 12px;
+   -fx-color: #FFFFFF;
+   -fx-cursor: pointer;
+   -fx-display: inline-block;
+   -fx-font-size: 16px;
+   -fx-font-weight: 500;
+   -fx-line-height: 2.5;
+   -fx-outline: transparent;
+   -fx-padding: 0 1rem;
+   -fx-text-align: center;
+   -fx-text-decoration: none;
+   -fx-transition: box-shadow .2s ease-in-out;
+   -fx-user-select: none;
+   -fx-webkit-user-select: none;
+   -fx-touch-action: manipulation;
+   -fx-white-space: nowrap;
+}
+
+.button-62:not([disabled]):focus {
+  -fx-box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5),
+   -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5),
+    .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.button-62:not([disabled]):hover {
+  -fx-box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5),
+   -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5),
+   .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
