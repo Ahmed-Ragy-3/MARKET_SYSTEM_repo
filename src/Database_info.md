@@ -31,8 +31,14 @@ Users
    ID
    Username
    Password (encrypted or hashed)
+   NEW_SUGGESTIONS
 
 Stores
    Item_ID
    quantity
    Arrival_Date
+
+Suggestion
+   SENDER_ID
+   RECIEVER_ID
+   ITEM_ID
