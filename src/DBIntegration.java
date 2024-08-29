@@ -18,7 +18,7 @@ public class DBIntegration {
             return resultSet;
             
         } catch (SQLException e) {
-            System.out.println("SQL Exception");
+            System.out.println("SQL Exception1");
             //e.printStackTrace();
             return null;
         }
@@ -35,10 +35,12 @@ public class DBIntegration {
                     String name = resultSet.getString("name");
                     System.out.println("ID: " + id + ", Name: " + name);
                 }
+            }else {
+                System.out.println("NULL");
             }
 
         } catch (SQLException e) {
-            System.out.println("SQL Exception");
+            System.out.println("SQL Exception2");
             //e.printStackTrace();
         } finally {
             if (resultSet != null) {
@@ -47,7 +49,7 @@ public class DBIntegration {
                     resultSet.getStatement().close();
                     resultSet.close();
                 } catch (SQLException e) {
-                    System.out.println("SQL Exception");
+                    System.out.println("SQL Exception3");
                     //e.printStackTrace();
                 }
             }

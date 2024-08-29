@@ -4,16 +4,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" styleClass="fullscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Runner">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333333" height="943.0" layoutX="-1.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" width="237.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333333" height="144.0" layoutX="-2.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="1705.0" />
-      <Label layoutX="25.0" layoutY="24.0" prefHeight="75.0" prefWidth="302.0" text="OnShopping" textFill="LIME">
+      <Label layoutX="44.0" layoutY="31.0" prefHeight="75.0" prefWidth="302.0" text="OnShopping" textFill="LIME">
          <font>
             <Font name="System Bold Italic" size="48.0" />
          </font>
@@ -23,19 +23,25 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <SplitMenuButton contentDisplay="BOTTOM" layoutX="950.0" layoutY="29.0" mnemonicParsing="false" text="Filter by" textAlignment="CENTER">
+      <SplitMenuButton contentDisplay="BOTTOM" layoutX="1106.0" layoutY="30.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="189.0" text="Filter by" textAlignment="CENTER">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
          <font>
-            <Font size="36.0" />
+            <Font size="24.0" />
          </font>
       </SplitMenuButton>
-      <Button layoutX="1383.0" layoutY="33.0" mnemonicParsing="false" stylesheets="@style.css" text="Login" textAlignment="CENTER" textFill="#1ff018">
+      <Button layoutX="1420.0" layoutY="28.0" mnemonicParsing="false" styleClass="mybutton" stylesheets="@style.css" text="Login" textAlignment="CENTER" textFill="#1ff018">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
+      <TextField layoutX="460.0" layoutY="37.0" prefHeight="65.0" prefWidth="564.0" styleClass="searchbar" stylesheets="@style.css">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label layoutX="494.0" layoutY="47.0" styleClass="searchlabel" stylesheets="@style.css" text="search OnShopping" />
    </children>
 </AnchorPane>

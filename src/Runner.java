@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 public class Runner extends Application{
    public boolean isAdmin;
    public boolean registered;
-
+   private String filterby;
    @Override
    public void start(Stage primaryStage) throws Exception {
       Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));

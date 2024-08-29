@@ -1,18 +1,90 @@
-CREATE TABLE items (
-    id          NUMBER (6)  PRIMARY KEY, 
-    name        VARCHAR2 (50),
-    price       NUMBER (8, 2) 
+-- Database Creation
+CREATE SEQUENCE cat_seq
+START WITH 100 INCREMENT BY 10
+NOCACHE;
+
+CREATE SEQUENCE prod_seq
+START WITH 10 INCREMENT BY 1
+NOCACHE;
+
+CREATE SEQUENCE users_seq
+START WITH 100 INCREMENT BY 1
+NOCACHE;
+
+CREATE TABLE Categories (
+   CATEGORY_ID          NUMBER          PRIMARY KEY,
+   NAME                 VARCHAR2(30)    UNIQUE NOT NULL,
+   NUMBER_OF_PRODUCTS   NUMBER(8)       DEFAULT 0
+   --Image
 );
 
-INSERT INTO items (id, name, price) VALUES (1, 'Laptop', 999.99);
-INSERT INTO items (id, name, price) VALUES (2, 'Smartphone', 699.99);
-INSERT INTO items (id, name, price) VALUES (3, 'Tablet', 399.50);
-INSERT INTO items (id, name, price) VALUES (4, 'Smartwatch', 199.99);
-INSERT INTO items (id, name, price) VALUES (5, 'Headphones', 89.99);
-INSERT INTO items (id, name, price) VALUES (6, 'Monitor', 249.99);
-INSERT INTO items (id, name, price) VALUES (7, 'Keyboard', 49.99);
-INSERT INTO items (id, name, price) VALUES (8, 'Mouse', 29.99);
-INSERT INTO items (id, name, price) VALUES (9, 'Printer', 150.00);
-INSERT INTO items (id, name, price) VALUES (10, 'External Hard Drive', 75.00);
+CREATE TABLE Products (
+   PRODUCT_ID       NUMBER          PRIMARY KEY,
+   NAME             VARCHAR2(30)    NOT NULL,
+   PRICE            NUMBER(10, 4)   NOT NULL,
+   RATE             NUMBER(1)       DEFAULT 3,
+   DISCOUNT         NUMBER(3),
+   --Image(s)
+   CATEGORY_ID      NUMBER(10),
+   COMPANY          VARCHAR2(30),
+   QUANTITY         NUMBER(5)       NOT NULL,
+   DESCRIPTION      VARCHAR2(1000),
 
-select * from items;
+   CONSTRAINT fk_category FOREIGN KEY(CATEGORY_ID) REFERENCES Categories(CATEGORY_ID)
+);
+
+CREATE TABLE Users (
+   USER_ID          NUMBER          PRIMARY KEY,
+   USERNAME         VARCHAR2(30)    NOT NULL,
+   PASSWORD         VARCHAR2(100)   UNIQUE NOT NULL,
+   NEW_SUGGESTIONS  NUMBER(3)       DEFAULT 0
+);
+
+CREATE TABLE Stores (
+   PRODUCT_ID   NUMBER,
+   QUANTITY     NUMBER  NOT NULL,
+   ARRIVAL_DATE DATE    DEFAULT SYSDATE,
+
+   CONSTRAINT fk_product2 FOREIGN KEY(PRODUCT_ID) REFERENCES Products(PRODUCT_ID)
+);
+
+CREATE TABLE Suggestions (
+   SENDER_ID    NUMBER NOT NULL,
+   RECIEVER_ID  NUMBER NOT NULL,
+   PRODUCT_ID   NUMBER NOT NULL,
+
+   CONSTRAINT fk_sender FOREIGN KEY(SENDER_ID)      REFERENCES Users(USER_ID),
+   CONSTRAINT fk_reciever FOREIGN KEY(RECIEVER_ID)  REFERENCES Users(USER_ID),
+   CONSTRAINT fk_product FOREIGN KEY(PRODUCT_ID)    REFERENCES Products(PRODUCT_ID)
+);
+
+-- Create triggers
+CREATE OR REPLACE TRIGGER trg_category_id
+BEFORE INSERT ON Categories
+FOR EACH ROW
+BEGIN
+   IF :NEW.CATEGORY_ID IS NULL THEN
+      SELECT cat_seq.NEXTVAL INTO :NEW.CATEGORY_ID FROM dual;
+   END IF;
+END;/
+
+CREATE OR REPLACE TRIGGER trg_prod_id
+BEFORE INSERT ON Products
+FOR EACH ROW
+BEGIN
+   IF :NEW.PRODUCT_ID IS NULL THEN
+      SELECT prod_seq.NEXTVAL INTO :NEW.PRODUCT_ID FROM dual;
+   END IF;
+END;/
+
+CREATE OR REPLACE TRIGGER trg_users_id
+BEFORE INSERT ON USERS
+FOR EACH ROW
+BEGIN
+   IF :NEW.USER_ID IS NULL THEN
+      SELECT users_seq.NEXTVAL INTO :NEW.USER_ID FROM dual;
+   END IF;
+END;/
+
+-----------------------------------------------------------------------------------------------------------
+select * from Products;
