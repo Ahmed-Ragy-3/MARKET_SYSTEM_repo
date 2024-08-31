@@ -11,6 +11,7 @@ public class DBIntegration {
 
     public static ResultSet execQuery(String query) {
         ResultSet resultSet;
+        
         try {
             Connection connection = DriverManager.getConnection(JDBCURL, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
@@ -18,21 +19,21 @@ public class DBIntegration {
             return resultSet;
             
         } catch (SQLException e) {
-            System.out.println("SQL Exception1");
             //e.printStackTrace();
+            System.out.println("SQL Exception1");
             return null;
         }
     }
     public static void main(String[] args) {
         ResultSet resultSet = null;
         try {
-            resultSet = execQuery("SELECT * FROM PRODUCTS");
+            resultSet = execQuery("SELECT USER_ID,USERNAME FROM Users");
 
             if (resultSet != null) {
                 while (resultSet.next()) {
                     // Assuming your table has columns 'id' and 'name'
-                    int id = resultSet.getInt("id");
-                    String name = resultSet.getString("name");
+                    int id = resultSet.getInt("USER_ID");
+                    String name = resultSet.getString("USERNAME");
                     System.out.println("ID: " + id + ", Name: " + name);
                 }
             }else {
@@ -49,8 +50,8 @@ public class DBIntegration {
                     resultSet.getStatement().close();
                     resultSet.close();
                 } catch (SQLException e) {
-                    System.out.println("SQL Exception3");
-                    //e.printStackTrace();
+                    // System.out.println("SQL Exception3");
+                    // e.printStackTrace();
                 }
             }
         }

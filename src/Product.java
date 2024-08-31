@@ -1,3 +1,6 @@
+
+import java.sql.ResultSet;
+
 public class Product {
 
    private int id, remaining;
@@ -33,5 +36,11 @@ public class Product {
    
    public void getItemData(int id) {
       
+   }
+
+   public ResultSet get_products_in_price_range(float min, float max) {
+      String query = "select NAME, PRICE, DESCRIPTION from PRODUCTS where PRICE is between ";
+      query += Float.toString(min) + " and " + Float.toString(max);
+      return DBIntegration.execQuery(query);
    }
 }

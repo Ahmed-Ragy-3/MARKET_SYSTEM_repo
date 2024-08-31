@@ -19,14 +19,6 @@
       },
       {
          "type": "java",
-         "name": "Item_GUI",
-         "request": "launch",
-         "mainClass": "Item_GUI",
-         "projectName": "MARKET_SYSTEM_repo_91d8ec09",
-         "vmArgs": "--module-path \"C:\\VIP\\javafx-sdk-22.0.2\\lib\" --add-modules javafx.controls,javafx.fxml"
-      },
-      {
-         "type": "java",
          "name": "Runner",
          "request": "launch",
          "mainClass": "Runner",

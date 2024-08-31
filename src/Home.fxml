@@ -32,7 +32,7 @@
             <Font size="24.0" />
          </font>
       </SplitMenuButton>
-      <Button layoutX="1420.0" layoutY="28.0" mnemonicParsing="false" styleClass="mybutton" stylesheets="@style.css" text="Login" textAlignment="CENTER" textFill="#1ff018">
+      <Button layoutX="1420.0" layoutY="28.0" mnemonicParsing="false" onAction="#login_scene" styleClass="mybutton" stylesheets="@style.css" text="Login" textAlignment="CENTER" textFill="#1ff018">
          <font>
             <Font size="36.0" />
          </font>

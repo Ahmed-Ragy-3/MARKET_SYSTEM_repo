@@ -66,7 +66,7 @@ BEGIN
    IF :NEW.CATEGORY_ID IS NULL THEN
       SELECT cat_seq.NEXTVAL INTO :NEW.CATEGORY_ID FROM dual;
    END IF;
-END;/
+END;
 
 CREATE OR REPLACE TRIGGER trg_prod_id
 BEFORE INSERT ON Products
@@ -75,7 +75,7 @@ BEGIN
    IF :NEW.PRODUCT_ID IS NULL THEN
       SELECT prod_seq.NEXTVAL INTO :NEW.PRODUCT_ID FROM dual;
    END IF;
-END;/
+END;
 
 CREATE OR REPLACE TRIGGER trg_users_id
 BEFORE INSERT ON USERS
@@ -84,7 +84,7 @@ BEGIN
    IF :NEW.USER_ID IS NULL THEN
       SELECT users_seq.NEXTVAL INTO :NEW.USER_ID FROM dual;
    END IF;
-END;/
+END;
 
 -----------------------------------------------------------------------------------------------------------
 select * from Products;
