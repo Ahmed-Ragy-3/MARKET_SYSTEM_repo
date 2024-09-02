@@ -7,49 +7,48 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="854.0" prefWidth="716.0" style="-fx-background-color: #1A1A1A;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" styleClass="fullscreen" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login">
    <children>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="40.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="108.0" styleClass="backbutton" stylesheets="@style.css" text="      Back" textFill="WHITE">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="72.0" layoutY="64.0" mnemonicParsing="false" onAction="#back_button" prefHeight="95.0" prefWidth="145.0" styleClass="backbutton" stylesheets="@style.css" text="  Back" textFill="WHITE">
          <font>
-            <Font name="System Bold Italic" size="20.0" />
+            <Font name="System Bold Italic" size="24.0" />
          </font>
       </Button>
-      <TextField layoutX="156.0" layoutY="458.0" prefHeight="44.0" prefWidth="363.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px;">
+      <TextField layoutX="498.0" layoutY="338.0" prefHeight="50.0" prefWidth="650.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px;">
          <font>
-            <Font size="18.0" />
-         </font>
-         <opaqueInsets>
-            <Insets right="2.0" />
-         </opaqueInsets>
-      </TextField>
-      <TextField layoutX="156.0" layoutY="317.0" prefHeight="44.0" prefWidth="363.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px;">
-         <font>
-            <Font size="18.0" />
+            <Font name="Calibri" size="24.0" />
          </font>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </TextField>
-      <Text fill="WHITE" layoutX="171.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Username">
+      <Text fill="WHITE" layoutX="513.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Username">
          <font>
-            <Font size="24.0" />
+            <Font size="36.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="173.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Password">
+      <Text fill="WHITE" layoutX="511.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Password">
          <font>
-            <Font size="24.0" />
+            <Font size="36.0" />
          </font>
       </Text>
-      <Button layoutX="216.0" layoutY="577.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="108.0" style="-fx-background-radius: 10px;" text="Login">
+      <Button layoutX="627.0" layoutY="643.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="129.0" style="-fx-background-radius: 10px;" text="Login">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button layoutX="364.0" layoutY="577.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="108.0" style="-fx-background-radius: 10px;" text="Create">
+      <TextField layoutX="495.0" layoutY="528.0" prefHeight="50.0" prefWidth="650.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px;">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TextField>
+      <Button layoutX="834.0" layoutY="642.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="129.0" style="-fx-background-radius: 10px;" text="Create">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
    </children>
-</AnchorPane>
+</fx:root>

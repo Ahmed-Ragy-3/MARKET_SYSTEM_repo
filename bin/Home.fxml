@@ -9,10 +9,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" styleClass="fullscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Runner">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1050.0" prefWidth="1710.0" styleClass="fullscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Runner">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333333" height="943.0" layoutX="-1.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" width="237.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333333" height="144.0" layoutX="-2.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="1705.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333333" height="994.0" layoutX="-1.0" layoutY="67.0" stroke="BLACK" strokeType="INSIDE" width="237.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333333" height="144.0" layoutX="-2.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="1716.0" />
       <Label layoutX="44.0" layoutY="31.0" prefHeight="75.0" prefWidth="302.0" text="OnShopping" textFill="LIME">
          <font>
             <Font name="System Bold Italic" size="48.0" />
@@ -32,7 +32,7 @@
             <Font size="24.0" />
          </font>
       </SplitMenuButton>
-      <Button layoutX="1420.0" layoutY="28.0" mnemonicParsing="false" onAction="#login_scene" styleClass="mybutton" stylesheets="@style.css" text="Login" textAlignment="CENTER" textFill="#1ff018">
+      <Button layoutX="1420.0" layoutY="28.0" mnemonicParsing="false" onAction="#login_button" styleClass="mybutton" stylesheets="@style.css" text="Login" textAlignment="CENTER" textFill="#1ff018">
          <font>
             <Font size="36.0" />
          </font>

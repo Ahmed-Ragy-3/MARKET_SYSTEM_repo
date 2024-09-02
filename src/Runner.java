@@ -1,47 +1,56 @@
-import java.awt.event.ActionEvent;
+//import VIP.javafx-sdk-22.0.2.javafx;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.Node;
 import javafx.stage.Stage;
-
+import javafx.scene.Node;
+import javafx.event.ActionEvent;
 
 public class Runner extends Application {
-   public boolean isAdmin;
-   public boolean registered;
+   public static boolean registered;
+   public static final String SHOPNAME = "OnShopping";
 
-   private Stage stage;
-   private Scene scene;
-   private Parent root;
-   //private String filterby;
-   
-   // public void login_scene(ActionEvent event) {
-   //    root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-   //    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-   //    scene = new Scene(root);
-   //    stage.setTitle("Login");
-   //    stage.setScene(scene);
-   //    stage.show();
-   // }
-   
-   @Override
-   public void start(Stage primaryStage) throws Exception {
-      try {          
-         root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-         //System.out.println("here");
-         scene = new Scene(root);
-         stage = primaryStage;
-         stage.setTitle("Home");
-         stage.setScene(scene);
-         stage.show();
+   public static Stage stage;
+   public static Scene scene;
+   public static Parent root;
+
+   public void login_button(ActionEvent event) {
+      try {
+         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+         display("Login");
       } catch (Exception e) {
-         //e.printStackTrace();
+         System.out.println("print Stack trace 1");
+         e.printStackTrace();
       }
    }
-   
+
+   // Static method to display a specific screen
+   public static void display(String screen) {
+      try {
+         root = FXMLLoader.load(Runner.class.getResource(screen + ".fxml"));
+         scene = new Scene(root);
+         stage.setTitle(SHOPNAME + " - " + screen);
+         stage.setScene(scene);
+         stage.setFullScreen(true);
+         stage.show();
+      } catch (Exception e) {
+         System.out.println("print Stack trace 2");
+         e.printStackTrace();
+      }
+   }
+
+   @Override
+   public void start(Stage primaryStage) throws Exception {
+      try {
+         stage = primaryStage;
+         display("Home"); // Display the initial "Home" screen
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
+
    public static void main(String[] args) {
-      //System.out.println("11");
       launch(args);
    }
 }

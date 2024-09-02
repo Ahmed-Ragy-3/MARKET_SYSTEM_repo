@@ -1,0 +1,36 @@
+{
+   // Use IntelliSense to learn about possible attributes.
+   // Hover to view descriptions of existing attributes.
+   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+   "version": "0.2.0",
+   "configurations": [
+      {
+         "type": "java",
+         "name": "Login",
+         "request": "launch",
+         "mainClass": "Login",
+         "projectName": "MARKET_SYSTEM_repo_91d8ec09"
+      },
+      {
+         "type": "java",
+         "name": "DBIntegration",
+         "request": "launch",
+         "mainClass": "DBIntegration",
+         "projectName": "MARKET_SYSTEM_repo_91d8ec09"
+      },
+      {
+         "type": "java",
+         "name": "Current File",
+         "request": "launch",
+         "mainClass": "${file}"
+      },
+      {
+         "type": "java",
+         "name": "Runner",
+         "request": "launch",
+         "mainClass": "Runner",
+         "projectName": "MARKET_SYSTEM_repo_91d8ec09",
+         "vmArgs": "--module-path \"C:\\VIP\\javafx-sdk-22.0.2\\lib\" --add-modules javafx.controls,javafx.fxml"
+      }
+   ]
+}

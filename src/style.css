@@ -38,17 +38,15 @@ Icons: https://www.flaticon.com/free-icons
    -fx-text-fill: #ffffff;
    -fx-font-size: 35px;
 }
-
 .mybutton:hover {
-   -fx-background-color: transparent;
-   -fx-border-width: 1px;
-   -fx-border-radius: 50px;
    -fx-border-color: #26c5ff;
    -fx-text-fill: #26c5ff;
-   -fx-font-size: 35px;
 }
 
 .backbutton {
    -fx-background-color: #3498db;
    -fx-shape: "M 8,10 L 14,14 V 12 H 22 V 8 H 14 L 14,6 L 8,10"; /* SVG path data */
+}
+.backbutton:hover {
+   -fx-background-color: #1876b5;
 }
