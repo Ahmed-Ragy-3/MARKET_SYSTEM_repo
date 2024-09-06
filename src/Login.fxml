@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" styleClass="fullscreen" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" styleClass="fullscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginClass">
    <children>
       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="72.0" layoutY="64.0" mnemonicParsing="false" onAction="#back_button" prefHeight="95.0" prefWidth="145.0" styleClass="backbutton" stylesheets="@style.css" text="  Back" textFill="WHITE">
          <font>
@@ -51,4 +51,4 @@
          </font>
       </Button>
    </children>
-</fx:root>
+</AnchorPane>
