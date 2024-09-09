@@ -1,13 +1,13 @@
-
 import java.sql.ResultSet;
+//import java.util.List;
 
 public class Product {
 
    private int id, remaining;
-   public String name, categoryName, CompanyName, Description;
+   public String name, category, company, description;
    public float price, rate;
-   private byte discount;
-   //Image(s)
+   public byte discount;
+   public String imageUrl;
 
    public Product() {}
 
@@ -26,21 +26,23 @@ public class Product {
       this.remaining = remaining;
    }
 
-   public byte getDiscount() {
-      return discount;
-   }
-   public void setDiscount(byte discount) {
-      this.discount = discount;
-   }
-   /////////////////////////////////
+   // // get product by its id
+   // public Product getProduct(int id) {
    
-   public void getItemData(int id) {
-      
-   }
+   // }
+
+   // // get product by its name
+   // public Product getProduct(String name) {
+   
+   // }
+
+   // public List<Product> getProductsInCategory(String category_name) {
+
+   // }
 
    public ResultSet get_products_in_price_range(float min, float max) {
       String query = "select NAME, PRICE, DESCRIPTION from PRODUCTS where PRICE is between ";
       query += Float.toString(min) + " and " + Float.toString(max);
-      return DBIntegration.execQuery(query);
+      return DB.execQuery(query);
    }
 }

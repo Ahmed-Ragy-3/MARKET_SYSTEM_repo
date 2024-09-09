@@ -42,3 +42,11 @@ Suggestion
    SENDER_ID
    RECIEVER_ID
    ITEM_ID
+
+
+
+Export command
+expdp MARKET/marketdb@localhost:1521/ORCLPDB schemas=MARKET directory=db_dir dumpfile=MARKET.dmp logfile=MARKET_export.log
+
+Import command
+impdp MARKET/marketdb@localhost:1521/ORCLPDB schemas=MARKET directory=db_dir dumpfile=MARKET.dmp logfile=MARKET_import.log

@@ -7,14 +7,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1700.0" styleClass="fullscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginClass">
+<AnchorPane fx:id="rootPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1010.0" prefWidth="1710.0" styleClass="fullscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login">
    <children>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="72.0" layoutY="64.0" mnemonicParsing="false" onAction="#back_button" prefHeight="95.0" prefWidth="145.0" styleClass="backbutton" stylesheets="@style.css" text="  Back" textFill="WHITE">
+      <fx:include source="Home_bar.fxml" />
+      <Text fill="WHITE" layoutX="552.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Username">
          <font>
-            <Font name="System Bold Italic" size="24.0" />
+            <Font name="System Bold" size="36.0" />
          </font>
-      </Button>
-      <TextField layoutX="498.0" layoutY="338.0" prefHeight="50.0" prefWidth="650.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px;">
+      </Text>
+      <TextField fx:id="username" layoutX="537.0" layoutY="281.0" prefHeight="50.0" prefWidth="581.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px;">
          <font>
             <Font name="Calibri" size="24.0" />
          </font>
@@ -22,22 +23,12 @@
             <Insets />
          </opaqueInsets>
       </TextField>
-      <Text fill="WHITE" layoutX="513.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Username">
+      <Text fill="WHITE" layoutX="550.0" layoutY="425.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Password">
          <font>
-            <Font size="36.0" />
+            <Font name="System Bold" size="36.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="511.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Password">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Text>
-      <Button layoutX="627.0" layoutY="643.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="129.0" style="-fx-background-radius: 10px;" text="Login">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <TextField layoutX="495.0" layoutY="528.0" prefHeight="50.0" prefWidth="650.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px;">
+      <TextField fx:id="password1" layoutX="540.0" layoutY="453.0" prefHeight="50.0" prefWidth="581.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px;">
          <font>
             <Font name="Calibri" size="24.0" />
          </font>
@@ -45,9 +36,32 @@
             <Insets />
          </opaqueInsets>
       </TextField>
-      <Button layoutX="834.0" layoutY="642.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="129.0" style="-fx-background-radius: 10px;" text="Create">
+      <Text fx:id="confirm" fill="WHITE" layoutX="552.0" layoutY="573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password" visible="false">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <TextField fx:id="password2" layoutX="542.0" layoutY="601.0" prefHeight="50.0" prefWidth="581.0" style="-fx-border-radius: 20px; -fx-background-radius: 20px;" visible="false">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TextField>
+      <Button fx:id="submit" layoutX="727.0" layoutY="625.0" mnemonicParsing="false" onAction="#submit_button" onKeyPressed="#submit_button" onKeyTyped="#submit_button" prefHeight="73.0" prefWidth="175.0" style="-fx-background-radius: 20px;" text="Sign in" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="cna" layoutX="508.0" layoutY="858.0" mnemonicParsing="false" onAction="#create_new_account" prefHeight="37.0" prefWidth="383.0" styleClass="cna" stylesheets="@style.css" text="Create new account ?" textFill="#00d7ff" underline="true">
+         <font>
+            <Font name="System Italic" size="36.0" />
+         </font>
+      </Button>
+      <Button fx:id="cna1" layoutX="523.0" layoutY="867.0" mnemonicParsing="false" onAction="#create_new_account" prefHeight="77.0" prefWidth="201.0" styleClass="cna" stylesheets="@style.css" text="Sign in ?" textFill="#00d7ff" underline="true" visible="false">
+         <font>
+            <Font name="System Italic" size="36.0" />
          </font>
       </Button>
    </children>

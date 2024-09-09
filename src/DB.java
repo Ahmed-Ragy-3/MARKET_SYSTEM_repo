@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DBIntegration {
+public class DB {
     public final static String JDBCURL = "jdbc:oracle:thin:@localhost:1521/ORCLPDB";
     public final static String USERNAME = "MARKET";
     public final static String PASSWORD = "marketdb";
@@ -19,8 +19,8 @@ public class DBIntegration {
             return resultSet;
             
         } catch (SQLException e) {
-            //e.printStackTrace();
             System.out.println("SQL Exception1");
+            //e.printStackTrace();
             return null;
         }
     }

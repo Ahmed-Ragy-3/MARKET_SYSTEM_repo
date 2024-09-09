@@ -20,11 +20,6 @@ Icons: https://www.flaticon.com/free-icons
    -fx-text-fill: #bdbdbd;
 }
 
-.searchlabel {
-   -fx-text-fill: #8b8b8b;
-   -fx-font-size: 30px;
-}
-
 .filterby {
    -fx-text-fill: #ffffff;
    -fx-font-size: 20px;
@@ -39,14 +34,23 @@ Icons: https://www.flaticon.com/free-icons
    -fx-font-size: 35px;
 }
 .mybutton:hover {
-   -fx-border-color: #26c5ff;
-   -fx-text-fill: #26c5ff;
+   -fx-border-color: #00ff2a;
+   -fx-text-fill: #00ff2a;
 }
 
-.backbutton {
-   -fx-background-color: #3498db;
-   -fx-shape: "M 8,10 L 14,14 V 12 H 22 V 8 H 14 L 14,6 L 8,10"; /* SVG path data */
+.cna {
+   -fx-background-color: transparent;
+   -fx-text-fill: #00e5ff;
 }
-.backbutton:hover {
-   -fx-background-color: #1876b5;
+.cna:hover {
+   -fx-text-fill: #0037ff;
+}
+
+.searchbutton {
+   -fx-background-color: #ffffff;
+   -fx-shape: "M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z";
+   -fx-border-width: 2px;
+}
+.searchbutton:hover {
+   -fx-background-color: #00ff2a;
 }

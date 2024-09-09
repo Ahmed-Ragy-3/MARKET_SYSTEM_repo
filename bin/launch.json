@@ -6,6 +6,13 @@
    "configurations": [
       {
          "type": "java",
+         "name": "DB",
+         "request": "launch",
+         "mainClass": "DB",
+         "projectName": "MARKET_SYSTEM_repo_91d8ec09"
+      },
+      {
+         "type": "java",
          "name": "Login",
          "request": "launch",
          "mainClass": "Login",
