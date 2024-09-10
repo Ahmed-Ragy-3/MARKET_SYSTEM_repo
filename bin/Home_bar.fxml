@@ -7,30 +7,31 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1010.0" prefWidth="1710.0" styleClass="fullscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Runner">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1010.0" prefWidth="1710.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Runner">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333333" height="130.0" layoutX="-2.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="1716.0" />
-      <TextField layoutX="438.0" layoutY="31.0" prefHeight="65.0" prefWidth="564.0" styleClass="searchbar" stylesheets="@style.css" text="    search OnShopping">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333333" height="130.0" stroke="BLACK" strokeType="INSIDE" width="1710.0" />
+      <TextField layoutX="438.0" layoutY="34.0" prefHeight="55.0" prefWidth="564.0" styleClass="searchbar" stylesheets="@style.css" text="    search OnShopping">
          <font>
             <Font size="24.0" />
          </font>
       </TextField>
-      <ChoiceBox layoutX="1104.0" layoutY="31.0" prefHeight="64.0" prefWidth="152.0" />
-      <Button layoutX="6.0" layoutY="1.0" mnemonicParsing="false" onAction="#OnShopping" style="-fx-background-color: transparent;" text="OnShopping" textFill="LIME">
+      <ChoiceBox layoutX="1104.0" layoutY="33.0" prefHeight="64.0" prefWidth="152.0" />
+      <Button layoutX="6.0" layoutY="3.0" mnemonicParsing="false" onAction="#OnShopping" style="-fx-background-color: transparent;" text="OnShopping" textFill="LIME">
          <font>
             <Font name="System Bold Italic" size="55.0" />
          </font>
       </Button>
-      <Button layoutX="932.0" layoutY="42.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="44.0" rotate="2.0" styleClass="searchbutton" stylesheets="@style.css" textFill="WHITE" />
-      <Button fx:id="login" layoutX="1408.0" layoutY="25.0" mnemonicParsing="false" onAction="#login_button" styleClass="mybutton" stylesheets="@style.css" text="Login" textAlignment="CENTER" textFill="#1ff018">
+      <Button layoutX="947.0" layoutY="41.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="40.0" rotate="2.0" styleClass="searchbutton" stylesheets="@style.css" textFill="WHITE" />
+      <Button fx:id="login" layoutX="1408.0" layoutY="28.0" mnemonicParsing="false" onAction="#login_button" styleClass="mybutton" stylesheets="@style.css" text="Login" textAlignment="CENTER" textFill="#1ff018">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
-      <Button fx:id="usernameButton" layoutX="1283.0" layoutY="12.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="401.0" style="-fx-text-fill: #00ff00;" styleClass="cna" text="name of user" visible="false">
+      <Button layoutX="1283.0" layoutY="12.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="401.0" style="-fx-text-fill: #00ff00;" styleClass="cna" text="name of user" visible="false">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
       </Button>
+      <AnchorPane fx:id="fxmlContent" layoutY="130.0" prefHeight="880.0" prefWidth="1710.0" styleClass="contentscreen" />
    </children>
 </AnchorPane>

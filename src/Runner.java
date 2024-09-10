@@ -1,10 +1,12 @@
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.*;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
@@ -14,39 +16,34 @@ public class Runner extends Application {
    public static User user;
 
    public static Stage stage;
-   public static Parent root;
-
+   
+   @FXML
+   private AnchorPane fxmlContent;  // For Scene Builder
+   private static AnchorPane content;  // Main content area
+   
    @FXML
    private Button login, usernameButton;
-
-   private static Runner instance;
-
-   public Runner() {
-      instance = this;
+   
+   @FXML
+   public void initialize() {
+      content = fxmlContent;
    }
 
-   // Singleton pattern: method to get the instance of Runner
-   public static Runner getInstance() {
-      return instance;
-   }
+   // @FXML
+   // public void showName(String name) {
+   //    usernameButton.setText(name);
+   // }
 
-   //@FXML
-   public void showName(String name) {
-      System.out.println("In show name");
-      usernameButton.setText(name);
-      usernameButton.setVisible(true);
-   }
-
-   public static void display(String screen) {
+   public static void display(String fxmlScreen) {
       try {
-         root = FXMLLoader.load(Runner.class.getResource(screen + ".fxml"));
-         stage.setScene(new Scene(root));
-         stage.setTitle(SHOPNAME + " - " + screen);
-         stage.setMaximized(true);
-         stage.show();
+         Parent inroot = FXMLLoader.load(Runner.class.getResource(fxmlScreen + ".fxml"));
+         stage.setTitle(SHOPNAME + " - " + fxmlScreen);
+         content.getChildren().setAll(inroot);
+
       } catch (Exception e) {
-         System.out.println("Error when displaying " + screen);
-         e.printStackTrace();
+         System.out.println("Error when displaying " + fxmlScreen);
+         System.out.println(e);
+         // e.printStackTrace();
       }
    }
    
@@ -55,13 +52,13 @@ public class Runner extends Application {
    }
    
    public void login_button(ActionEvent event) {
-      //login.setVisible(false);
+      login.setVisible(false);
       display("Login");
    }
    
    public void search_button(ActionEvent event) {
-      // display the window responsible for multiple items 
-      //display("");
+      // Implement the functionality to display the appropriate screen
+      // display("SearchScreen");
    }
    
    public static void showAlert(String title, String content) {
@@ -74,8 +71,14 @@ public class Runner extends Application {
    @Override
    public void start(Stage primaryStage) throws Exception {
       stage = primaryStage;
-      display("Home");  // Starts with the Login screen
+      Parent root = FXMLLoader.load(getClass().getResource("Home_bar.fxml"));
+      stage.setScene(new Scene(root));
+      stage.setMaximized(true);
+      stage.show();
+
+      display("Home");
    }
+
    public static void main(String[] args) {
       user = null;
       launch(args);

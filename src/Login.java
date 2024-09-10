@@ -27,7 +27,7 @@ public class Login {
       if(this.haveAccount) {
          this.haveAccount = false;
          submit.setText("Create");
-         submit.setLayoutY(submit.getLayoutY() + 85);
+         submit.setLayoutY(submit.getLayoutY() + 90);
    
          confirm.setVisible(true);
          cna.setVisible(false);
@@ -36,7 +36,7 @@ public class Login {
       }else {
          this.haveAccount = true;
          submit.setText("Sign in");
-         submit.setLayoutY(submit.getLayoutY() - 85);
+         submit.setLayoutY(submit.getLayoutY() - 90);
    
          confirm.setVisible(false);
          cna1.setVisible(true);
@@ -89,10 +89,6 @@ public class Login {
       }
 
       //Runner.user = User.getUser(name);
-      System.out.println("reach here 1");
-      Runner runnerInstance = Runner.getInstance();
-      runnerInstance.showName(name);
-      System.out.println("reach here 2");
       Runner.display("Home");
    }
 
