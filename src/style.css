@@ -58,3 +58,15 @@ Icons: https://www.flaticon.com/free-icons
 .searchbutton:hover {
    -fx-background-color: #00ff2a;
 }
+
+.productbutton {
+   -fx-background-color: #19007d;
+   -fx-text-fill: #ffffff;
+   -fx-background-radius: 50px;
+   -fx-border-radius: 50px;
+   -fx-border-color: #ffffff;
+   -fx-border-width: 4px;
+}
+.productbutton:hover {
+   -fx-background-color: #000000;
+}

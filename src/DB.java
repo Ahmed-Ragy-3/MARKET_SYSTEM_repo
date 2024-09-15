@@ -19,41 +19,26 @@ public class DB {
             return resultSet;
             
         } catch (SQLException e) {
-            System.out.println("SQL Exception1");
+            System.out.println("SQL Exception in execQuery method in DB Class");
+            System.out.println(e);
             //e.printStackTrace();
-            return null;
+        }
+        return null;
+    }
+
+    public static boolean emptyQuery(ResultSet resultSet) {
+        try {
+            return !resultSet.next();
+        } catch (SQLException e) {
+            System.out.println("In emptyQuery");
+            System.out.println(e);
+            // e.printStackTrace();
+            return false;
         }
     }
+
     public static void main(String[] args) {
-        ResultSet resultSet = null;
-        try {
-            resultSet = execQuery("SELECT USER_ID,USERNAME FROM Users");
-
-            if (resultSet != null) {
-                while (resultSet.next()) {
-                    // Assuming your table has columns 'id' and 'name'
-                    int id = resultSet.getInt("USER_ID");
-                    String name = resultSet.getString("USERNAME");
-                    System.out.println("ID: " + id + ", Name: " + name);
-                }
-            }else {
-                System.out.println("NULL");
-            }
-
-        } catch (SQLException e) {
-            System.out.println("SQL Exception2");
-            //e.printStackTrace();
-        } finally {
-            if (resultSet != null) {
-                try {
-                    resultSet.getStatement().getConnection().close();
-                    resultSet.getStatement().close();
-                    resultSet.close();
-                } catch (SQLException e) {
-                    // System.out.println("SQL Exception3");
-                    // e.printStackTrace();
-                }
-            }
-        }
+        // String str = "elknew" + nullfunc();
+        // System.out.println(str);
     }
 }

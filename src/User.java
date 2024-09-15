@@ -7,13 +7,35 @@ public class User {
    public String username;
    private String password;
    public float balance;
+   public int new_suggestions;
    public List<Product> suggestions, cart;
    
    public User() {}
+
+   public User(String username) {
+      this(DB.execQuery("SELECT * FROM USERS WHERE USERNAME = '" + username + "'"));
+   }
    
-   public User(String name, String password) {
-      this.username = name;
-      this.password = password;
+   public User(ResultSet res) {
+      if(DB.emptyQuery(res))  return;
+
+      try {
+         this.setId(res.getInt("USER_ID")); 
+         this.username = res.getString("USERNAME"); 
+         this.setPassword(res.getString("PASSWORD"));
+         this.new_suggestions = res.getInt("NEW_SUGGESTIONS");
+         this.balance = res.getFloat("BALANCE");
+         
+         ResultSet res2 = DB.execQuery("SELECT * FROM SUGGESTIONS WHERE RECIEVER_ID = " + this.id);
+         while (res2.next()) {
+            Product product = new Product(res2.getInt("PRODUCT_ID"));
+            this.suggestions.add(product);
+         }
+
+      } catch (SQLException e) {
+         System.out.println("SQL EXCEPTION in getUser method");
+         //e.printStackTrace();
+      }
    }
 
    public void setId(int id) {
@@ -27,29 +49,6 @@ public class User {
       this.password = password;
    }
 
-   public static User getUser(String username) {
-      User user = new User();
-      ResultSet res = DB.execQuery("SELECT * FROM USERS WHERE USERNAME = " + username);
-      if(res == null)  return null;
-      
-      try {
-         user.setId(res.getInt("USER_ID")); 
-         user.username = username; 
-         user.setPassword(res.getString("PASSWORD"));
-         user.balance = res.getFloat("BALANCE");
-         
-         ResultSet res2 = DB.execQuery("SELECT * FROM SUGGESTIONS WHERE RECIEVER_ID = " + user.id);
-         while (res2.next()) {
-            //user.suggestions.add(getProduct(res2.getInt("PRODUCT_ID")));
-         }
-
-      } catch (SQLException e) {
-         System.out.println("SQL EXCEPTION in getUser method");
-         //e.printStackTrace();
-      }
-
-      return user;
-   }
 
    public static void insertUser(String username, String password) {
       System.out.println("INSERT INTO USERS VALUES (NULL, \'" + username + "\', \'" + password + "\', 0, 0);");

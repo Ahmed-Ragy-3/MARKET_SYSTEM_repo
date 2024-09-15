@@ -26,6 +26,7 @@ public class Runner extends Application {
    
    @FXML
    public void initialize() {
+      System.out.println("Initialize");
       content = fxmlContent;
    }
 

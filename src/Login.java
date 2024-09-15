@@ -88,7 +88,7 @@ public class Login {
          User.insertUser(name, password1.getText());
       }
 
-      //Runner.user = User.getUser(name);
+      Runner.user = new User(name);
       Runner.display("Home");
    }
 

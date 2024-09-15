@@ -1,5 +1,5 @@
 ;;; 
-Export: Release 21.0.0.0.0 - Production on Sun Sep 8 14:39:39 2024
+Export: Release 21.0.0.0.0 - Production on Sat Sep 14 20:12:20 2024
 Version 21.3.0.0.0
 
 Copyright (c) 1982, 2021, Oracle and/or its affiliates.  All rights reserved.
@@ -22,13 +22,12 @@ Processing object type SCHEMA_EXPORT/TABLE/INDEX/INDEX
 Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
 Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/REF_CONSTRAINT
 Processing object type SCHEMA_EXPORT/TABLE/TRIGGER
-. . exported "MARKET"."USERS"                            10.67 KB     155 rows
+. . exported "MARKET"."PRODUCTS"                         8.370 MB    2933 rows
+. . exported "MARKET"."USERS"                            11.42 KB     156 rows
 . . exported "MARKET"."SUGGESTIONS"                      7.695 KB     108 rows
-. . exported "MARKET"."CATEGORIES"                           0 KB       0 rows
-. . exported "MARKET"."PRODUCTS"                             0 KB       0 rows
 . . exported "MARKET"."STORES"                               0 KB       0 rows
 Master table "MARKET"."SYS_EXPORT_SCHEMA_01" successfully loaded/unloaded
 ******************************************************************************
 Dump file set for MARKET.SYS_EXPORT_SCHEMA_01 is:
   C:\VIP\MARKET_SYSTEM_REPO\MARKET.DMP
-Job "MARKET"."SYS_EXPORT_SCHEMA_01" successfully completed at Sun Sep 8 14:40:49 2024 elapsed 0 00:01:05
+Job "MARKET"."SYS_EXPORT_SCHEMA_01" successfully completed at Sat Sep 14 20:14:03 2024 elapsed 0 00:01:41
