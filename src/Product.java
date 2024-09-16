@@ -23,13 +23,13 @@ public class Product {
    }
 
    public Product(ResultSet res) {
-      if(DB.emptyQuery(res)) {
-         System.out.println("No Product with id: " + id);
-         return;
-      }
-
+      // if(DB.emptyQuery(res)) {
+      //    System.out.println("No Product");
+      //    return;
+      // }
       try {
          this.id = res.getInt("PRODUCT_ID");
+         System.out.println(this.id);
          this.name = res.getString("PRODUCT_NAME");
          this.price = res.getFloat("PRICE");
          this.rate = res.getFloat("RATE");
@@ -38,41 +38,43 @@ public class Product {
          this.category = res.getString("CATEGORY");
          this.brand = res.getString("BRAND");
          this.description = res.getString("DESCRIPTION");
-
-         String features_str = res.getString("FEATURES");
-         if(features_str != null) {
-            String[] features_arr = features_str.split("\"\",\"\"");
-            features_arr[0].replaceAll("[\"\"", "");
-            features_arr[features_arr.length - 1].replaceAll("\"\"]", "");
-
-            features = new ArrayList<>();
-            for (String feature : features_arr) {
-               features.add(feature);
-            }
-         }else {
-            features = null;
-         }
-
-         String image_str = res.getString("IMAGE_URL");
-         images = new ArrayList<>();
-         images.add(new Image(image_str));
-         String images_str = res.getString("IMAGES");
-
-         if(images_str != null) {
-            String[] images_arr = images_str.split("\"\",\"\"");
-            images_arr[0].replaceAll("[\"\"", "");
-            images_arr[images_arr.length - 1].replaceAll("\"\"]", "");
-
-            for(String str : images_arr) {
-               images.add(new Image(str));
-            }
-         }
          
-      } catch (SQLException e) {
-         System.out.println("In Product Constructer");
+         this.features = modifyFeatures(res.getString("FEATURES"));
+         this.images = modifyImages(res.getString("IMAGE_URL"), res.getString("IMAGES"));
+         
+      } catch (Exception e) {
+         System.out.println("In Product Constructer - id = " + this.id);
          System.out.println(e);
+         System.out.println(this.images.get(0));
          // e.printStackTrace();
       }
+   }
+
+   public static List<Image> modifyImages(String image_str, String images_str) {
+      List<Image> images = new ArrayList<>();
+      
+      String[] images_arr = images_str.split(",");
+      
+      if(image_str != null) {   // there is IMAGE_URL
+         images.add(new Image(image_str));
+      }
+      for(String str : images_arr) {
+         images.add(new Image(str));
+      }
+
+      return images;
+   }
+
+   public static List<String> modifyFeatures(String features_str) {
+      if(features_str == null) return null;
+   
+      List<String> features = new ArrayList<>();
+
+      String[] features_arr = features_str.split(".,");
+      for (String feature : features_arr) {
+         features.add(feature);
+      }
+      return features;
    }
 
    // Getters & Setters

@@ -24,9 +24,8 @@ Icons: https://www.flaticon.com/free-icons
    -fx-text-fill: #bdbdbd;
 }
 
-.filterby {
-   -fx-text-fill: #ffffff;
-   -fx-font-size: 20px;
+.frame {
+   
 }
 
 .mybutton {
@@ -70,3 +69,4 @@ Icons: https://www.flaticon.com/free-icons
 .productbutton:hover {
    -fx-background-color: #000000;
 }
+

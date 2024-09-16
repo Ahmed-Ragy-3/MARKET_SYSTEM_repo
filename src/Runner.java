@@ -42,7 +42,7 @@ public class Runner extends Application {
          content.getChildren().setAll(inroot);
 
       } catch (Exception e) {
-         System.out.println("Error when displaying " + fxmlScreen);
+         System.out.println("Error in display method when displaying " + fxmlScreen);
          System.out.println(e);
          // e.printStackTrace();
       }
