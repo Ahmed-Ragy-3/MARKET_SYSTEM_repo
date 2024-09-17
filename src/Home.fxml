@@ -3,9 +3,8 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="880.0" prefWidth="1710.0" styleClass="contentscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Home">
    <children>
-      <ListView fx:id="categories" prefHeight="880.0" prefWidth="1710.0" />
+      <ListView fx:id="categories" onScroll="#scroll_load" prefHeight="880.0" prefWidth="1710.0" style="-fx-background-color: #0d0d0d;" />
    </children>
 </AnchorPane>
