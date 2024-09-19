@@ -71,21 +71,21 @@ Icons: https://www.flaticon.com/free-icons
 }
 
 
-.vbox-container-categoryframe {
+.category-cell {
    -fx-background-color: black;
-   -fx-padding: 40px;
-   /* -fx-border-color: rgb(0, 0, 255);
-   -fx-border-width: 10px; */
+   -fx-padding: 30px;
+   -fx-border-color: rgb(25, 255, 25);
+   -fx-border-width: 6px;
    /* -fx-spacing: 40px; */
 }
 
 
 .category-label {
    -fx-text-fill: rgb(37, 227, 37);
-   -fx-font-size: 45px;
+   -fx-font-size: 40px;
    -fx-font-weight: bold;
    -fx-alignment: center;
-   -fx-padding: 15px;
+   -fx-padding: 10px;
 }
 
 .list-view-categoryframe {
@@ -94,18 +94,31 @@ Icons: https://www.flaticon.com/free-icons
    /* -fx-padding: 20px; */
 }
 
-.list-cell-categoryframe {
-   -fx-background-color: rgb(56, 56, 56);
+.frame-cell {
+   -fx-background-color: #303030;
    -fx-text-fill: rgb(255, 255, 255);
    -fx-font-size: 40px;
    -fx-alignment: center;
-   -fx-border-width: 1px;
+   -fx-border-width: 0.25px;
    -fx-border-color: rgb(255, 255, 255);
    /* -fx-padding: 10px; */
    -fx-spacing: 20px;
 }
 
-.list-cell-categoryframe:hover {
-   -fx-background-color: rgb(176, 188, 43);
+.frame-cell:hover {
+   -fx-background-color: #4e4e4e;
    /* -fx-cursor: hand; */
+}
+
+
+.image-view {
+   -fx-border-color: #00ff00;
+   -fx-border-width: 50px;
+}
+
+.product-name {
+   -fx-text-fill: #e5ff00;
+   -fx-font-size: 20px;
+   -fx-font-weight: bold;
+   -fx-padding: 1px;
 }

@@ -8,6 +8,7 @@ import javafx.scene.input.ScrollEvent;
 
 public class Home implements Initializable {
    public static byte categoryIndex;
+   private static boolean loaded = false;
    
    @FXML
    private ListView<CategoryFrame> categories;
@@ -21,16 +22,32 @@ public class Home implements Initializable {
       "Industrial & Tools", "Office & Events",
       "Outdoors & Garden", "Pet Supplies", "Toys & Games", "Others"
    };
-
+   public static boolean empty_category = false;
+   
    @Override
    public void initialize(URL location, ResourceBundle resources) {
+      if(loaded) {
+         return;
+      }
       System.out.println("Initialize Home");
-      categories.setCellFactory(param -> new CategoryFrame());
-      // categories.sHeight
+      categories.setCellFactory(param -> {
+         CategoryFrame categoryCell = new CategoryFrame();
+         categoryCell.autosize();
+         categoryCell.getStyleClass().add("category-cell");
+         return categoryCell;
+      });
+
       for (categoryIndex = 0; categoryIndex < 3; categoryIndex++) {
          System.out.println(categoryNames[categoryIndex]);
-         categories.getItems().add(new CategoryFrame(categoryNames[categoryIndex]));
+         CategoryFrame cat_frame = new CategoryFrame(categoryNames[categoryIndex]);
+         
+         if(!empty_category) {
+            categories.getItems().add(cat_frame);
+         } else {
+            empty_category = false;
+         }
       }
+      loaded = true;
    }
 
    @FXML

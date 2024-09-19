@@ -1,4 +1,4 @@
-Database info
+Database info:
    Username(Schema): MARKET
    Password: marketdb
    Port: 1521
@@ -8,18 +8,21 @@ Database info
    Connect using Oracle client: OraDB21Home1
 
 
-Tables:
-Products
-   ID (hidden except for admin) (PK)
-   Name
-   Price
-   Rate
-   Discount (if exists)
-   Image(s)
-   Category ID (FK)
-   Company responsible for the product
-   Available number of product (hidden except for admin and if <= 10 products available)
-   Description or specifications or Highlights 
+Products Table:
+   Name	      	   Type           Null?
+   PRODUCT_ID		   NUMBER         NOT NULL
+   PRODUCT_NAME	   VARCHAR2(500)  NOT NULL
+   PRICE	            NUMBER(10,4)   NOT NULL
+   RATE		         NUMBER(3,2)
+   DISCOUNT		      NUMBER
+   BRAND		         VARCHAR2(100)
+   QUANTITY	         NUMBER(5)      NOT NULL
+   IMAGE_URL		   VARCHAR2(1000)
+   CATEGORY		      VARCHAR2(50)
+   PRODUCTION_DATE	DATE
+   IMAGES		      VARCHAR2(4000)
+   FEATURES		      VARCHAR2(4000)
+   DESCRIPTION		   CLOB
 
 Category
    ID
@@ -27,21 +30,26 @@ Category
    Number of Items
    Image
 
-Users
-   ID
-   Username
-   Password (encrypted or hashed)
-   NEW_SUGGESTIONS
+Users Table:
+   Name	   	      Type           Null?
+   USER_ID		      NUMBER         NOT NULL
+   USERNAME	         VARCHAR2(30)   NOT NULL
+   PASSWORD	         VARCHAR2(100)  NOT NULL
+   NEW_SUGGESTIONS   NUMBER(3)
+   BALANCE		      NUMBER
+
 
 Stores
    Item_ID
    quantity
    Arrival_Date
 
-Suggestion
-   SENDER_ID
-   RECIEVER_ID
-   ITEM_ID
+Suggestions Table:
+   Name	   	   Type
+   SENDER_ID	   NUMBER
+   RECIEVER_ID	   NUMBER
+   PRODUCT_ID	   NUMBER
+
 
 
 
