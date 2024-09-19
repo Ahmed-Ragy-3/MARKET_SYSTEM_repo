@@ -52,8 +52,8 @@ public class User {
 
    public static void insertUser(String username, String password) {
       System.out.println("INSERT INTO USERS VALUES (NULL, \'" + username + "\', \'" + password + "\', 0, 0);");
-      DB.execQuery("INSERT INTO USERS VALUES (NULL, \'" + username + "\', \'" + password + "\', 0, 0);");
-      DB.execQuery("COMMIT;");
+      DB.execQuery("INSERT INTO USERS VALUES (NULL, \'" + username + "\', \'" + password + "\', 0, 0)");
+      // DB.execQuery("COMMIT;");
    }
 }
 

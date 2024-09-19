@@ -17,6 +17,7 @@ public class DB {
             Connection connection = DriverManager.getConnection(JDBCURL, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
+            // statement.executeQuery("COMMIT");
             return resultSet;
             
         } catch (SQLException e) {

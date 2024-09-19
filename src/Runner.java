@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -30,11 +31,6 @@ public class Runner extends Application {
       content = fxmlContent;
    }
 
-   // @FXML
-   // public void showName(String name) {
-   //    usernameButton.setText(name);
-   // }
-
    public static void display(String fxmlScreen) {
       try {
          Parent inroot = FXMLLoader.load(Runner.class.getResource(fxmlScreen + ".fxml"));
@@ -53,7 +49,6 @@ public class Runner extends Application {
    }
    
    public void login_button(ActionEvent event) {
-      login.setVisible(false);
       display("Login");
    }
    
@@ -75,6 +70,7 @@ public class Runner extends Application {
       Parent root = FXMLLoader.load(getClass().getResource("Home_bar.fxml"));
       stage.setScene(new Scene(root));
       stage.setMaximized(true);
+      stage.getIcons().add(new Image("shopping_icon.png"));
       stage.show();
 
       display("Home");
