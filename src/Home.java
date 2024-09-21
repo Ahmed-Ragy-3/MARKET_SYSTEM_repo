@@ -13,6 +13,8 @@ public class Home implements Initializable {
    @FXML
    private ListView<CategoryFrame> categories;
 
+   private static ListView<CategoryFrame> mycategories = new ListView<>();
+
    public static final String[] categoryNames = {
       "Arts & Crafts", "Automotive",
       "Baby & Kids", "Beauty & Personal Care",
@@ -27,8 +29,17 @@ public class Home implements Initializable {
    @Override
    public void initialize(URL location, ResourceBundle resources) {
       if(loaded) {
+         categories.getItems().clear();
+         categories.getItems().addAll(mycategories.getItems());
+         categories.setCellFactory(param -> {
+            CategoryFrame categoryCell = new CategoryFrame();
+            categoryCell.autosize();
+            categoryCell.getStyleClass().add("category-cell");
+            return categoryCell;
+         });
          return;
       }
+
       System.out.println("Initialize Home");
       categories.setCellFactory(param -> {
          CategoryFrame categoryCell = new CategoryFrame();
@@ -47,6 +58,7 @@ public class Home implements Initializable {
             empty_category = false;
          }
       }
+      mycategories.getItems().addAll(categories.getItems());
       loaded = true;
    }
 
@@ -54,18 +66,15 @@ public class Home implements Initializable {
    void scroll_load(ScrollEvent event) {
       if (categoryIndex >= categoryNames.length)   return;
       System.out.println(categoryNames[categoryIndex]);
-      categories.getItems().add(new CategoryFrame(categoryNames[categoryIndex++]));
+      
+      CategoryFrame cat_frame = new CategoryFrame(categoryNames[categoryIndex++]);
+      if(!empty_category) {
+         categories.getItems().add(cat_frame);
+         mycategories.getItems().add(cat_frame);
+      } else {
+         empty_category = false;
+      }
+
    }
 
-   // ObservableList<Frame> frames = FXCollections.observableArrayList(
-   // new Frame("https://example.com/image1.png", "Product 1", "$69.99",
-   // "Description 1"),
-   // new Frame("https://example.com/image2.png", "Product 2", "$89.99",
-   // "Description 2"),
-   // new Frame("https://example.com/image3.png", "Product 3", "$29.99",
-   // "Description 3")
-   // );
-
-   // ListView<Frame> listView = new ListView<>(frames);
-   // listView.setCellFactory(param -> new Frame());
 }

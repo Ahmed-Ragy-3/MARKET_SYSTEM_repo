@@ -6,11 +6,15 @@ Icons: https://www.flaticon.com/free-icons
 */
 
 .fullscreen {
-   -fx-background-size: 1710px 1010px;
+   /* -fx-background-size: 1710px 1010px; */
+   -fx-pref-height: 1010px;
+   -fx-pref-width: 1710px;
    -fx-background-color: #1A1A1A;
 }
 .contentscreen {
-   -fx-background-size: 1710px 880px;
+   /* -fx-background-size: 1710px 880px; */
+   -fx-pref-height: 880px;
+   -fx-pref-width: 1710px;
    -fx-background-color: #1A1A1A;
 }
 

@@ -7,6 +7,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -24,11 +26,72 @@ public class Runner extends Application {
    
    @FXML
    private Button login, usernameButton;
+
+   @FXML
+   private ChoiceBox<String> adminChoices;
+
+   @FXML
+   private Label adminLabel;
+
+   public static Button nameButton;    // same as usernameButton
+   public static Button loginButton;
+   public static Button adminButton;
+   public static ChoiceBox<String> myadminChoices;
+   public static Label myadminLabel;
    
    @FXML
    public void initialize() {
       System.out.println("Initialize");
       content = fxmlContent;
+      nameButton = usernameButton;
+      loginButton = login;
+
+      myadminChoices = adminChoices;
+      myadminLabel = adminLabel;
+   }
+
+   @FXML
+   void profile(ActionEvent event) {
+      display("UserProfile");
+   }
+
+   public static void setUser(String name) {
+      user = new User(name);
+      nameButton.setText(name);
+      nameButton.setVisible(true);
+      loginButton.setVisible(false);
+
+      if(user.isAdmin) {
+         myadminChoices.getItems().addAll(new String[] {
+            "Add Product", "Edit Product", "Delete Product",
+            "Delete user account", "Review purchase movement",
+            "Add Admin account"
+         });
+         myadminChoices.setVisible(true);
+         myadminChoices.setOnAction(Runner::adminChoice);
+         myadminLabel.setVisible(true);
+      }
+   }
+
+   private static void adminChoice(ActionEvent event) {
+      String choice = myadminChoices.getValue();
+      if(choice.compareTo("Add Product") == 0) {
+         ProductController.status = "Add";
+         display("Product");
+
+      } else if(choice.compareTo("Edit Product") == 0) {
+         ProductController.status = "Edit";
+         display("Product");
+         
+      } else if(choice.compareTo("Delete Product") == 0) {
+         ProductController.status = "Delete";
+         display("Product");
+
+      } else if(choice.compareTo("Review purchase movement") == 0) {
+
+      } else {
+         
+      }
    }
 
    public static void display(String fxmlScreen) {

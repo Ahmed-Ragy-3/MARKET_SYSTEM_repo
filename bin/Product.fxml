@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="contentscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField layoutX="79.0" layoutY="122.0" prefHeight="59.0" prefWidth="1011.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="82.0" layoutY="284.0" prefHeight="59.0" prefWidth="1011.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="1202.0" layoutY="284.0" prefHeight="59.0" prefWidth="265.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="313.0" layoutY="396.0" prefHeight="59.0" prefWidth="342.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label layoutX="78.0" layoutY="40.0" prefHeight="63.0" prefWidth="295.0" text="Product Name" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="81.0" layoutY="200.0" prefHeight="63.0" prefWidth="212.0" text="Image URL" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="1199.0" layoutY="220.0" prefHeight="63.0" prefWidth="109.0" text="Price" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="102.0" layoutY="391.0" prefHeight="63.0" prefWidth="134.0" text="Brand" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <TextField layoutX="1198.0" layoutY="395.0" prefHeight="59.0" prefWidth="313.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label layoutX="962.0" layoutY="394.0" prefHeight="63.0" prefWidth="188.0" text="Quantity" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <TextField layoutX="1198.0" layoutY="121.0" prefHeight="59.0" prefWidth="285.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label layoutX="1197.0" layoutY="40.0" prefHeight="63.0" prefWidth="185.0" text="Category" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="865.0" layoutY="505.0" prefHeight="63.0" prefWidth="185.0" text="Features" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="89.0" layoutY="510.0" prefHeight="63.0" prefWidth="221.0" text="Description" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <TextArea layoutX="88.0" layoutY="597.0" prefHeight="240.0" prefWidth="740.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextArea>
+      <TextArea layoutX="872.0" layoutY="597.0" prefHeight="240.0" prefWidth="740.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextArea>
+   </children>
+</AnchorPane>

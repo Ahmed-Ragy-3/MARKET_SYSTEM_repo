@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="880.0" prefWidth="1710.0" styleClass="contentscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserProfile">
+   <children>
+      <Label layoutX="246.0" layoutY="89.0" prefHeight="117.0" prefWidth="339.0" text="user name" textFill="WHITE">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+      <Label layoutX="620.0" layoutY="260.0" prefHeight="117.0" prefWidth="339.0" text="Balance" textFill="WHITE">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
