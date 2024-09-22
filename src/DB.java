@@ -47,7 +47,7 @@ public class DB {
 
     public static boolean emptyQuery(ResultSet resultSet) {
         try {
-            return !resultSet.next();
+            return !resultSet.isBeforeFirst();
         } catch (SQLException e) {
             System.out.println("In emptyQuery");
             System.out.println(e);

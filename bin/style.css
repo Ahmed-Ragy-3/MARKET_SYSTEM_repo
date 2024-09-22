@@ -19,17 +19,18 @@ Icons: https://www.flaticon.com/free-icons
 }
 
 .searchbar {
-   -fx-padding: 10px;
    -fx-background-color: #0d0d0d;
    -fx-background-radius: 35px;
+
    -fx-border-color: #2eff35;
    -fx-border-width: 1px;
    -fx-border-radius: 35px;
-   -fx-text-fill: #bdbdbd;
-}
 
-.frame {
-   
+   -fx-text-fill: #bdbdbd;
+
+   -fx-padding: 0 0 0 21;
+   -fx-pref-height: 50px;
+   -fx-pref-width: 550px;
 }
 
 .mybutton {
@@ -80,7 +81,6 @@ Icons: https://www.flaticon.com/free-icons
    -fx-padding: 30px;
    -fx-border-color: rgb(25, 255, 25);
    -fx-border-width: 6px;
-   /* -fx-spacing: 40px; */
 }
 
 
@@ -93,7 +93,7 @@ Icons: https://www.flaticon.com/free-icons
 }
 
 .list-view-categoryframe {
-   -fx-background-color: white;
+   -fx-background-color: black;
    -fx-border-color: black;
    /* -fx-padding: 20px; */
 }
@@ -125,4 +125,14 @@ Icons: https://www.flaticon.com/free-icons
    -fx-font-size: 20px;
    -fx-font-weight: bold;
    -fx-padding: 1px;
+}
+
+
+.product-bars {
+   -fx-background-color: #000000;
+   -fx-background-radius: 35px;
+   -fx-border-width: 1px;
+   -fx-border-color: #f2ffb9;
+   -fx-border-radius: 25px;
+   -fx-text-fill: #ffffff;
 }

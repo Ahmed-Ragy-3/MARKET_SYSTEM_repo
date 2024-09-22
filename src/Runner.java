@@ -6,9 +6,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -32,6 +35,11 @@ public class Runner extends Application {
 
    @FXML
    private Label adminLabel;
+   
+   @FXML
+   private ListView<String> searchSuggestions = new ListView<>();   
+   @FXML
+   private TextField searchBar;
 
    public static Button nameButton;    // same as usernameButton
    public static Button loginButton;
@@ -48,6 +56,8 @@ public class Runner extends Application {
 
       myadminChoices = adminChoices;
       myadminLabel = adminLabel;
+
+      searchBar.textProperty().addListener((observable, oldText, newText) -> searching(newText));
    }
 
    @FXML
@@ -55,6 +65,7 @@ public class Runner extends Application {
       display("UserProfile");
    }
 
+   
    public static void setUser(String name) {
       user = new User(name);
       nameButton.setText(name);
@@ -72,13 +83,13 @@ public class Runner extends Application {
          myadminLabel.setVisible(true);
       }
    }
-
+   
    private static void adminChoice(ActionEvent event) {
       String choice = myadminChoices.getValue();
       if(choice.compareTo("Add Product") == 0) {
          ProductController.status = "Add";
          display("Product");
-
+         
       } else if(choice.compareTo("Edit Product") == 0) {
          ProductController.status = "Edit";
          display("Product");
@@ -88,18 +99,18 @@ public class Runner extends Application {
          display("Product");
 
       } else if(choice.compareTo("Review purchase movement") == 0) {
-
+         
       } else {
          
       }
    }
-
+   
    public static void display(String fxmlScreen) {
       try {
          Parent inroot = FXMLLoader.load(Runner.class.getResource(fxmlScreen + ".fxml"));
          stage.setTitle(SHOPNAME + " - " + fxmlScreen);
          content.getChildren().setAll(inroot);
-
+         
       } catch (Exception e) {
          System.out.println("Error in display method when displaying " + fxmlScreen);
          System.out.println(e);
@@ -115,6 +126,12 @@ public class Runner extends Application {
       display("Login");
    }
    
+   @FXML
+   void searching(String newText) {
+      searchSuggestions.getItems().add(newText);
+      searchSuggestions.setVisible(true);
+   }
+
    public void search_button(ActionEvent event) {
       // Implement the functionality to display the appropriate screen
       // display("SearchScreen");

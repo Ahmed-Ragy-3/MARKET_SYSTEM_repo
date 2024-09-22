@@ -21,7 +21,7 @@ public class Frame extends ListCell<Frame> {
    public Frame() {}
    
    public Frame(ResultSet res) {
-      System.out.println("start");
+      // System.out.println("start");
       try {
          this.id = res.getInt(1);
          this.name = new Label(res.getString(2));
@@ -53,7 +53,7 @@ public class Frame extends ListCell<Frame> {
       price.getStyleClass().add("product-name");
       
       vbox = new VBox(image, name, price);  
-      System.out.println("end");
+      // System.out.println("end");
    }
 
    @Override
@@ -82,6 +82,7 @@ class CategoryFrame extends ListCell<CategoryFrame> {
       ResultSet res = DB.execQuery("SELECT * FROM HOME_VIEW WHERE CATEGORY = '" + name + "'");
       if(DB.emptyQuery(res)) {
          Home.empty_category = true;
+         System.out.println("empty");
          return;
       }
 
@@ -98,10 +99,12 @@ class CategoryFrame extends ListCell<CategoryFrame> {
       }
 
       topProducts.setOrientation(Orientation.HORIZONTAL);
-      topProducts.autosize();
-      topProducts.setMaxWidth(1500);
-      topProducts.setStyle("-fx-alignment: center");
-      topProducts.setMinHeight(Frame.HEIGHT + 100);
+      topProducts.setMaxWidth(topProducts.getItems().size() * (Frame.WIDTH + 49));
+      // topProducts.setMaxWidth(1500);
+      // topProducts.setStyle("-fx-padding: 0 0 0 70");
+      topProducts.setStyle("-fx-background-color: black");
+      topProducts.setMinHeight(Frame.HEIGHT + 90);
+
       topProducts.setCellFactory(lv -> {
          Frame cell = new Frame();
          cell.autosize();
