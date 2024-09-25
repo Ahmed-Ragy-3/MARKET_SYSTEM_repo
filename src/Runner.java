@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -18,6 +19,7 @@ import javafx.event.ActionEvent;
 
 public class Runner extends Application {
    public static final String SHOPNAME = "OnShopping";
+   public static final String PATH = "C:/VIP/MARKET_SYSTEM_repo";
    public static boolean isAdmin;
    public static User user;
 
@@ -29,30 +31,32 @@ public class Runner extends Application {
    
    @FXML
    private Button login, usernameButton;
+   public static Button nameButton;    // same as usernameButton
+   public static Button loginButton;
 
    @FXML
    private ChoiceBox<String> adminChoices;
+   public static ChoiceBox<String> myadminChoices;
 
    @FXML
    private Label adminLabel;
+   public static Label myadminLabel;
    
    @FXML
    private ListView<String> searchSuggestions = new ListView<>();   
    @FXML
    private TextField searchBar;
 
-   public static Button nameButton;    // same as usernameButton
-   public static Button loginButton;
    public static Button adminButton;
-   public static ChoiceBox<String> myadminChoices;
-   public static Label myadminLabel;
-   
+   public static ProductsTrie trie;
+   public static StringBuilder typedText = new StringBuilder();
+
    @FXML
    public void initialize() {
       System.out.println("Initialize");
-      content = fxmlContent;
       nameButton = usernameButton;
       loginButton = login;
+      content = fxmlContent;
 
       myadminChoices = adminChoices;
       myadminLabel = adminLabel;
@@ -128,7 +132,15 @@ public class Runner extends Application {
    
    @FXML
    void searching(String newText) {
-      searchSuggestions.getItems().add(newText);
+      if(newText.length() < typedText.length()) {
+         typedText.deleteCharAt(typedText.length() - 1);
+         trie.removeChar();
+      }else {
+         char recentChar = newText.charAt(newText.length() - 1);
+         trie.addChar(recentChar);
+         typedText.append(recentChar);
+      }
+      searchSuggestions.getItems().setAll(newText);
       searchSuggestions.setVisible(true);
    }
 
@@ -158,6 +170,13 @@ public class Runner extends Application {
 
    public static void main(String[] args) {
       user = null;
+      try {
+         trie = ProductsTrie.loadTrie(PATH);
+      } catch (ClassNotFoundException | IOException e) {
+         System.out.println("In Loading Trie");
+         System.out.println(e);
+         // e.printStackTrace();
+      }
       launch(args);
    }
 }

@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1010.0" prefWidth="1710.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Runner">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#333333" height="130.0" stroke="BLACK" strokeType="INSIDE" width="1710.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2e2e2e" height="130.0" stroke="BLACK" strokeType="INSIDE" width="1710.0" />
       <TextField fx:id="searchBar" layoutX="452.0" layoutY="42.0" prefHeight="30.0" prefWidth="565.0" promptText="search OnShopping" styleClass="searchbar" stylesheets="@style.css">
          <font>
             <Font size="20.0" />

@@ -6,6 +6,13 @@
    "configurations": [
       {
          "type": "java",
+         "name": "ProductsTrie",
+         "request": "launch",
+         "mainClass": "ProductsTrie",
+         "projectName": "MARKET_SYSTEM_repo_91d8ec09"
+      },
+      {
+         "type": "java",
          "name": "DB",
          "request": "launch",
          "mainClass": "DB",

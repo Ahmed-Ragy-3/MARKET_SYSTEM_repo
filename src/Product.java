@@ -22,10 +22,10 @@ public class Product {
    }
 
    public Product(ResultSet res) {
-      // if(DB.emptyQuery(res)) {
-      //    System.out.println("No Product");
-      //    return;
-      // }
+      if(DB.emptyQuery(res)) {
+         System.out.println("No Product");
+         return;
+      }
       try {
          this.id = res.getInt("PRODUCT_ID");
          System.out.println(this.id);
@@ -90,18 +90,6 @@ public class Product {
    public void setRemaining(int remaining) {
       this.remaining = remaining;
    }
-
-   // public List<Product> fillProducts(ResultSet res) {
-   //    List<Product> list = new ArrayList<>();
-   //    while (res.next()) {
-         
-   //    }
-   // }
-
-
-   // public List<Product> getProductsInCategory(String category_name) {
-
-   // }
 
    public ResultSet get_products_in_price_range(float min, float max) {
       String query = "select NAME, PRICE, DESCRIPTION from PRODUCTS where PRICE is between ";
