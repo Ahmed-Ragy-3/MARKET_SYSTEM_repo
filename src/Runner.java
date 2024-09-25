@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -20,7 +19,8 @@ import javafx.event.ActionEvent;
 public class Runner extends Application {
    public static final String SHOPNAME = "OnShopping";
    public static final String PATH = "C:/VIP/MARKET_SYSTEM_repo";
-   public static boolean isAdmin;
+   public static final int MAX_SUGGESTIONS = 10;
+
    public static User user;
 
    public static Stage stage;
@@ -62,6 +62,18 @@ public class Runner extends Application {
       myadminLabel = adminLabel;
 
       searchBar.textProperty().addListener((observable, oldText, newText) -> searching(newText));
+      searchSuggestions.setCellFactory(lv -> new ListCell<>() {
+         @Override
+         protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+               setText(null);
+            } else {
+               setText(item);
+            }
+            getStyleClass().add("suggestions");
+         }
+      });
    }
 
    @FXML
@@ -132,6 +144,7 @@ public class Runner extends Application {
    
    @FXML
    void searching(String newText) {
+
       if(newText.length() < typedText.length()) {
          typedText.deleteCharAt(typedText.length() - 1);
          trie.removeChar();
@@ -140,12 +153,22 @@ public class Runner extends Application {
          trie.addChar(recentChar);
          typedText.append(recentChar);
       }
-      searchSuggestions.getItems().setAll(newText);
-      searchSuggestions.setVisible(true);
+      System.out.println(trie.suggest().size());
+
+      searchSuggestions.getItems().setAll(trie.suggest());
+
+      if(searchSuggestions.getItems().isEmpty()) {
+         searchSuggestions.setVisible(false);
+
+      }else {
+         searchSuggestions.setVisible(true);
+      }
    }
 
    public void search_button(ActionEvent event) {
       // Implement the functionality to display the appropriate screen
+      searchSuggestions.getItems().clear();
+      searchSuggestions.setVisible(false);
       // display("SearchScreen");
    }
    
@@ -170,13 +193,9 @@ public class Runner extends Application {
 
    public static void main(String[] args) {
       user = null;
-      try {
-         trie = ProductsTrie.loadTrie(PATH);
-      } catch (ClassNotFoundException | IOException e) {
-         System.out.println("In Loading Trie");
-         System.out.println(e);
-         // e.printStackTrace();
-      }
+      trie = new ProductsTrie();
+      trie.start();      // thread
       launch(args);
    }
+   
 }

@@ -48,7 +48,7 @@ public class Home implements Initializable {
          return categoryCell;
       });
 
-      for (categoryIndex = 0; categoryIndex < 4; categoryIndex++) {
+      for (categoryIndex = 0; categoryIndex < 6; categoryIndex++) {
          System.out.println(categoryNames[categoryIndex]);
          CategoryFrame cat_frame = new CategoryFrame(categoryNames[categoryIndex]);
          

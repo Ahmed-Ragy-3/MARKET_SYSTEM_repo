@@ -136,3 +136,14 @@ Icons: https://www.flaticon.com/free-icons
    -fx-border-radius: 25px;
    -fx-text-fill: #ffffff;
 }
+
+.suggestions {
+   -fx-background-color: #040013;
+   -fx-border-color: #0092ec;
+   -fx-border-width: 0.2px;
+   -fx-text-fill: #e1e1e1;
+   -fx-pref-height: 40px;
+
+   -fx-font-size: 15px;
+   -fx-font-weight: bold;
+}

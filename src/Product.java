@@ -27,8 +27,9 @@ public class Product {
          return;
       }
       try {
+         res.next();
+         
          this.id = res.getInt("PRODUCT_ID");
-         System.out.println(this.id);
          this.name = res.getString("PRODUCT_NAME");
          this.price = res.getFloat("PRICE");
          this.rate = res.getFloat("RATE");
@@ -38,13 +39,13 @@ public class Product {
          this.brand = res.getString("BRAND");
          this.description = res.getString("DESCRIPTION");
          
-         this.features = modifyFeatures(res.getString("FEATURES"));
-         this.images = modifyImages(res.getString("IMAGE_URL"), res.getString("IMAGES"));
+         // this.features = modifyFeatures(res.getString("FEATURES"));
+         // this.images = modifyImages(res.getString("IMAGE_URL"), res.getString("IMAGES"));
          
       } catch (Exception e) {
          System.out.println("In Product Constructer - id = " + this.id);
          System.out.println(e);
-         System.out.println(this.images.get(0));
+         // System.out.println(this.images.get(0));
          // e.printStackTrace();
       }
    }

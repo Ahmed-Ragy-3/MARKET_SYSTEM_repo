@@ -18,17 +18,16 @@ class TrieNode implements Serializable {
    
    Map<Character, TrieNode> letters;
    List<Integer> ids;
-   boolean sentenceEnd, wordEnd;
+   boolean sentenceEnd = false;
+   boolean wordEnd;
    
    public TrieNode() {
-      this.sentenceEnd = false;
       this.wordEnd = false;
       letters = new HashMap<>();
       this.ids = new ArrayList<>();
    }
    
    public TrieNode(Character c) {
-      this.sentenceEnd = false;
       this.wordEnd = false;
       letters = new HashMap<>();
       letters.put(c, new TrieNode());
@@ -36,7 +35,6 @@ class TrieNode implements Serializable {
    }
    
    public TrieNode(Character c, boolean end) {
-      this.sentenceEnd = end;
       this.wordEnd = end;
       letters = new HashMap<>();
       letters.put(c, new TrieNode());
@@ -45,16 +43,14 @@ class TrieNode implements Serializable {
 
 }
 
-public class ProductsTrie implements Serializable { 
+public class ProductsTrie extends Thread implements Serializable { 
    private TrieNode head;
    public Stack<TrieNode> stackTrieNodes;
-   public TrieNode current;
    int size;
 
    public ProductsTrie() {
       this.head = new TrieNode();
       this.size = 0;
-      this.current = head;
       this.stackTrieNodes = new Stack<>();
    }
 
@@ -67,37 +63,50 @@ public class ProductsTrie implements Serializable {
       this.head = new TrieNode();
    }
 
-   private String toLowerAlpha(String word) {
-      return word.replaceAll("[^a-zA-Z]", "").toLowerCase();
-  }
-
+   private String toLowerAlphaNum(String word) {
+      return word.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+   }
+   
    public void insert(String productName, int id) {
       String[] words = productName.split("\\s+");
       // System.out.println(productName);
+      TrieNode temp = head;
+      
+      // for (int i = 0; i < words.length; i++) {
+      //    temp = insertWord(words[i], id, temp);
+      //    this.size++;
+      // }
+      // temp.sentenceEnd = true;
+
       for (int i = 0; i < words.length; i++) {
-         TrieNode temp = insertWord(words[i], id, head);
-         for (int j = i + 1; j < words.length; j++) {
+         for (int j = i; j < words.length; j++) {
             temp = insertWord(words[j], id, temp);
          }
-         temp.sentenceEnd = true;
          this.size++;
+         temp.sentenceEnd = true;
+         temp = head;
       }
    }
    
    private TrieNode insertWord(String word, int id, TrieNode temp) {
-      word = toLowerAlpha(word);
+      word = toLowerAlphaNum(word);
       for(char c : word.toCharArray()) {
          temp.letters.putIfAbsent(c, new TrieNode());
          
          temp = temp.letters.get(c);
          temp.ids.add(id);
       }
+      // add space
+      temp.letters.putIfAbsent(' ', new TrieNode());
+      temp = temp.letters.get(' ');
+      temp.ids.add(id);
+
       temp.wordEnd = true;
       return temp;
    }
 
    public boolean search(String sentence) {
-      sentence = toLowerAlpha(sentence);
+      sentence = toLowerAlphaNum(sentence);
       TrieNode temp = head;
       for(char c : sentence.toCharArray()) {
          if(!temp.letters.containsKey(c))
@@ -147,38 +156,25 @@ public class ProductsTrie implements Serializable {
       }
    }
 
-   private List<StringBuilder> toList(TrieNode tempNode, List<StringBuilder> list, StringBuilder str) {
-      if(tempNode.sentenceEnd)
-         list.add(str);
-
-      for(char c : tempNode.letters.keySet()) {
-         toList(tempNode.letters.get(c), list, str.append(c));
+   private List<String> toList(TrieNode tempNode, List<String> list, StringBuilder str) {
+      if(tempNode.sentenceEnd || (str.length() > 50 && str.charAt(str.length() - 1) == ' ')) {
+         list.add(Runner.typedText + str.toString());
+         return list;
       }
-
-      return list;
-   }
-
-   
-   public List<StringBuilder> getWordsWithPrefix(TrieNode tempNode) {
-      List<StringBuilder> list = new ArrayList<>();
-
-      list = toList(tempNode, list, new StringBuilder());
-      return list;
-   }
-   
-   // void suggest(String prefix) {
-   //    int count = countWordsWithPrefix(prefix);
-   //    if(count == 0) {
-   //       System.out.println("No suggestions");
-   //       return;
-   //    } else if(count == 1) {
-   //       System.out.println(count + " suggestion : ");
-   //    }else {
-   //       System.out.println(count + " suggestions : ");
-   //    }
       
-   //    System.out.println(getWordsWithPrefix(prefix));
-   // }
+      for(char c : tempNode.letters.keySet()) {
+         str.append(c);
+         toList(tempNode.letters.get(c), list, str);
+         str.deleteCharAt(str.length() - 1);
+      }
+      return list;
+   }
+
+   public List<String> suggest() {
+      if(stackTrieNodes.isEmpty() || stackTrieNodes.peek() == null)  return new ArrayList<>();
+
+      return toList(stackTrieNodes.peek(), new ArrayList<>(), new StringBuilder());
+   }
    
    void printLevels() {
       // print the letters that is in front of the queue
@@ -187,6 +183,7 @@ public class ProductsTrie implements Serializable {
       queue.add(head.letters);
       int prev_level = 1;
       int current_level = 0;
+
       while (!queue.isEmpty()) {
          for(TrieNode tempNode : queue.peek().values()) {
             queue.add(tempNode.letters);
@@ -198,16 +195,14 @@ public class ProductsTrie implements Serializable {
             current_level = 0;
             System.out.println();
          }
-         
       }
    }
    
    public void addChar(char typed) {
-      current = current.letters.get(typed);
-      stackTrieNodes.push(current);
+      stackTrieNodes.push(stackTrieNodes.isEmpty() ? head.letters.get(typed) : stackTrieNodes.peek().letters.get(typed));
    }
    public void removeChar() {
-      current = stackTrieNodes.pop();
+      stackTrieNodes.pop();
    }
 
    public static void saveTrie(ProductsTrie trie, String filePath) throws IOException {
@@ -224,15 +219,18 @@ public class ProductsTrie implements Serializable {
 
    public static void main(String[] args) {
       // building trie
+   }
+
+   @Override
+   public void run() {
+      // Thread method
       ResultSet res = DB.execQuery("SELECT PRODUCT_ID, PRODUCT_NAME FROM PRODUCTS");
-      Runner.trie = new ProductsTrie();
       try {
          while (res.next()) {
-            Runner.trie.insert(res.getString(2), res.getInt(1));
+            insert(res.getString(2), res.getInt(1));
          }
       } catch (SQLException e) {
          System.out.println(e);
-         // e.printStackTrace();
       }
    }
 }

@@ -45,6 +45,6 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Label>
-      <ListView fx:id="searchSuggestions" layoutX="474.0" layoutY="92.0" prefHeight="200.0" prefWidth="445.0" style="-fx-background-color: black;" visible="false" />
+      <ListView fx:id="searchSuggestions" layoutX="474.0" layoutY="92.0" prefHeight="272.0" prefWidth="481.0" style="-fx-background-color: black;" visible="false" />
    </children>
 </AnchorPane>
