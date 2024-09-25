@@ -74,6 +74,10 @@ public class Runner extends Application {
             getStyleClass().add("suggestions");
          }
       });
+
+      searchSuggestions.setOnMouseClicked(event -> {
+         System.out.println(trie.getId(searchSuggestions.getSelectionModel().getSelectedItem()));
+      });
    }
 
    @FXML
@@ -149,11 +153,10 @@ public class Runner extends Application {
          typedText.deleteCharAt(typedText.length() - 1);
          trie.removeChar();
       }else {
-         char recentChar = newText.charAt(newText.length() - 1);
+         char recentChar = Character.toLowerCase(newText.charAt(newText.length() - 1));
          trie.addChar(recentChar);
          typedText.append(recentChar);
       }
-      System.out.println(trie.suggest().size());
 
       searchSuggestions.getItems().setAll(trie.suggest());
 
@@ -163,10 +166,16 @@ public class Runner extends Application {
       }else {
          searchSuggestions.setVisible(true);
       }
+
    }
 
    public void search_button(ActionEvent event) {
       // Implement the functionality to display the appropriate screen
+      if(searchSuggestions.getItems().size() == 1) {
+         // display("");   // omar page
+      }else {
+         // display all items
+      }
       searchSuggestions.getItems().clear();
       searchSuggestions.setVisible(false);
       // display("SearchScreen");

@@ -111,6 +111,13 @@ class CategoryFrame extends ListCell<CategoryFrame> {
          cell.getStyleClass().add("frame-cell");
          return cell;
       });
+
+      // Action event
+      topProducts.setOnMouseClicked(event -> {
+         Frame frame = topProducts.getSelectionModel().getSelectedItem();
+         System.out.println(frame.id);
+         // display("");   //  Omar page
+      });
       
       categoryName.setText(name);
       categoryName.getStyleClass().add("category-label");

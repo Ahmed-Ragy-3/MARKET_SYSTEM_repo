@@ -1,17 +1,10 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Stack;
 
 class TrieNode implements Serializable {
@@ -116,48 +109,24 @@ public class ProductsTrie extends Thread implements Serializable {
       }
       return temp.wordEnd;
    }
+   
+   public int getId(String suggestion) {
+      System.out.println(suggestion);
+      char[] suggestionChars = suggestion.toCharArray();
+      int i = Runner.typedText.length();
+      TrieNode temp = stackTrieNodes.peek().letters.get(suggestionChars[i]);
 
-   public void delete(int id, String...words) {
-      // Case 1 : deleting a word that doesn't exist in the ProductsTrie
-      // Case 2 : ahmed         (delete ahmed) ---> remove (a) in first hashmap
-      // Case 3 : do - done     (delete do)   ----> set wordEnd to false
-      // Case 4 : do - done     (delete done) ----> remove hashmap of letter (o)
-      // Case 5 : bear - bean   (delete bean) ----> remove key (n) in the hashmap of letter(a)
-      for(String word : words) delete(word, id);
-   }
-
-   private void delete(String word, int id) {
-      if(!search(word)) return; // Case 1
-      this.size--;
-      TrieNode temp = head;
-      Stack<TrieNode> stack = new Stack<>();
-      char[] wordArr = word.toCharArray();
-
-      for(char c : wordArr) {
-         stack.push(temp.letters.get(c));
-         temp = temp.letters.get(c);
-      }
-      if(!stack.peek().letters.isEmpty()) { // Case 3
-         stack.peek().sentenceEnd = false;
-         return;
-      }
-
-      int i = wordArr.length - 1;
-      boolean commonChar = false;
-      while (true) {
-         temp = stack.pop(); // First iteration ---> temp = last letter (must be removed)
-         if(!commonChar) {
-            if(stack.isEmpty()) break;
-            stack.peek().letters.remove(wordArr[i]);
+      while(++i < suggestionChars.length) {
+         if(temp.ids.size() == 1) {
+            return temp.ids.get(0);
          }
-         i--;
-         if(stack.isEmpty()) break;
-         commonChar = !stack.peek().letters.isEmpty();
+         temp = temp.letters.get(suggestionChars[i]);
       }
+      return temp.ids.get(0);
    }
 
    private List<String> toList(TrieNode tempNode, List<String> list, StringBuilder str) {
-      if(tempNode.sentenceEnd || (str.length() > 50 && str.charAt(str.length() - 1) == ' ')) {
+      if(tempNode.ids.size() == 1 && (tempNode.sentenceEnd || (str.length() > 50 && str.charAt(str.length() - 1) == ' '))) {
          list.add(Runner.typedText + str.toString());
          return list;
       }
@@ -176,28 +145,6 @@ public class ProductsTrie extends Thread implements Serializable {
       return toList(stackTrieNodes.peek(), new ArrayList<>(), new StringBuilder());
    }
    
-   void printLevels() {
-      // print the letters that is in front of the queue
-      // then add all letters of the printed hashmap
-      Queue<Map<Character, TrieNode>> queue = new LinkedList<>();
-      queue.add(head.letters);
-      int prev_level = 1;
-      int current_level = 0;
-
-      while (!queue.isEmpty()) {
-         for(TrieNode tempNode : queue.peek().values()) {
-            queue.add(tempNode.letters);
-            current_level++;
-         }
-         System.out.print(queue.poll().keySet().toString() + " ");
-         if(--prev_level == 0) {
-            prev_level = current_level;
-            current_level = 0;
-            System.out.println();
-         }
-      }
-   }
-   
    public void addChar(char typed) {
       stackTrieNodes.push(stackTrieNodes.isEmpty() ? head.letters.get(typed) : stackTrieNodes.peek().letters.get(typed));
    }
@@ -205,17 +152,17 @@ public class ProductsTrie extends Thread implements Serializable {
       stackTrieNodes.pop();
    }
 
-   public static void saveTrie(ProductsTrie trie, String filePath) throws IOException {
-      try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
-         oos.writeObject(trie);
-      }
-   }
+   // public static void saveTrie(ProductsTrie trie, String filePath) throws IOException {
+   //    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
+   //       oos.writeObject(trie);
+   //    }
+   // }
    
-   public static ProductsTrie loadTrie(String filePath) throws IOException, ClassNotFoundException {
-      try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
-         return (ProductsTrie) ois.readObject();
-      }
-   }
+   // public static ProductsTrie loadTrie(String filePath) throws IOException, ClassNotFoundException {
+   //    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
+   //       return (ProductsTrie) ois.readObject();
+   //    }
+   // }
 
    public static void main(String[] args) {
       // building trie

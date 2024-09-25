@@ -147,3 +147,7 @@ Icons: https://www.flaticon.com/free-icons
    -fx-font-size: 15px;
    -fx-font-weight: bold;
 }
+
+.suggestions:hover {
+   -fx-background-color: #002147;
+}
