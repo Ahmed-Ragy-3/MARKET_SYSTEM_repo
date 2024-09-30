@@ -1,18 +1,13 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -109,7 +104,7 @@ public class Runner extends Application {
       Label statusLabel = new Label("↺");
       statusLabel.setStyle("-fx-font-size: 25px; -fx-text-fill: green;");
       StackPane root = new StackPane(imageView, statusLabel);
-      StackPane.setAlignment(statusLabel, Pos.CENTER);
+      StackPane.setAlignment(statusLabel, javafx.geometry.Pos.CENTER);
       
       // Load the image asynchronously
       loadImageAsync(url, imageView, statusLabel);
@@ -117,7 +112,7 @@ public class Runner extends Application {
       return imageView;
    }
 
-   private static final ExecutorService executorService = Executors.newCachedThreadPool();
+   private static final java.util.concurrent.ExecutorService executorService = java.util.concurrent.Executors.newCachedThreadPool();
    private static void loadImageAsync(String imageUrl, ImageView imageView, Label statusLabel) {
       Task<Image> loadImageTask = new Task<>() {
          @Override
@@ -185,7 +180,7 @@ public class Runner extends Application {
          ProductController.status = "Delete";
          display("Product");
 
-      } else if(choice.compareTo("Review purchase movement") == 0) {
+      } else if(choice.compareTo("Review purchase history") == 0) {
          
       } else {
          
@@ -256,7 +251,7 @@ public class Runner extends Application {
    }
    
    public static void showAlert(String title, String content) {
-      Alert alert = new Alert(AlertType.INFORMATION);
+      Alert alert = new Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
       alert.setTitle(title);
       alert.setContentText(content);
       alert.showAndWait();

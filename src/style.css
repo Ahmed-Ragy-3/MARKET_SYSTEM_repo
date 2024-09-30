@@ -147,16 +147,31 @@ Icons: https://www.flaticon.com/free-icons
    -fx-text-fill: #a8bb00;
 }
 
-
+/* Product.fxml */
 .product-bars {
-   -fx-background-color: #000000;
+   -fx-background-color: #ebffe9;
    -fx-background-radius: 35px;
-   -fx-border-width: 1px;
-   -fx-border-color: #f2ffb9;
-   -fx-border-radius: 25px;
-   -fx-text-fill: #ffffff;
+   /* -fx-border-width: 0.5px;
+   -fx-border-color: #0dff00;
+   -fx-border-radius: 25px; */
+   -fx-text-fill: #000000;
 }
 
+.prod-labels {
+   -fx-text-fill: #fff764;
+}
+
+.status-button {
+   -fx-background-color: black;
+   -fx-text-fill: #fff200;
+   -fx-border-color: #fff200;
+   -fx-border-radius: 40px;
+   -fx-background-radius: 40px;
+}
+.status-button:hover {
+   -fx-background-color: #fff200;
+   -fx-text-fill: black;
+}
 
 /*  Multiple Products Page  */ 
 .product-frame-texts {
@@ -195,6 +210,14 @@ Icons: https://www.flaticon.com/free-icons
    -fx-border-radius: 10px;
    -fx-border-color: #000000;
    -fx-padding: 15px;
+}
+
+.enter-id {
+   -fx-background-color: black;
+   -fx-background-radius: 35px;
+   -fx-border-color: white;
+   -fx-border-radius: 35px;
+   -fx-text-fill: yellow;
 }
 
 .test {
