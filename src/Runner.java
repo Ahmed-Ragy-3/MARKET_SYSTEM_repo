@@ -1,20 +1,29 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javafx.application.Application;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
 
 public class Runner extends Application {
    public static final String SHOPNAME = "OnShopping";
@@ -35,7 +44,7 @@ public class Runner extends Application {
    public static Button loginButton;
 
    @FXML
-   private ChoiceBox<String> adminChoices;
+   private ChoiceBox<String> adminChoices, categoriesFilter;
    public static ChoiceBox<String> myadminChoices;
 
    @FXML
@@ -47,9 +56,13 @@ public class Runner extends Application {
    @FXML
    private TextField searchBar;
 
+   @FXML
+   private Label categoryLabel;
+
    public static Button adminButton;
    public static ProductsTrie trie;
    public static StringBuilder typedText = new StringBuilder();
+   public static Map<Integer, ImageView> imagesCache = new HashMap<>();
 
    @FXML
    public void initialize() {
@@ -78,7 +91,61 @@ public class Runner extends Application {
       searchSuggestions.setOnMouseClicked(event -> {
          System.out.println(trie.getId(searchSuggestions.getSelectionModel().getSelectedItem()));
       });
+
+      categoriesFilter.getItems().setAll(Home.categoryNames);
+      categoriesFilter.setOnAction(event -> {
+         DB.execQuery("CREATE OR REPLACE VIEW TEMP_VIEW AS SELECT PRODUCT_ID, PRODUCT_NAME, PRICE, RATE, DISCOUNT, BRAND, IMAGE_URL FROM PRODUCTS WHERE CATEGORY = '"
+         + categoriesFilter.getValue() + "'");
+         MultipleProducts.current = DB.execQuery("SELECT * FROM TEMP_VIEW");
+         categoryLabel.setVisible(false);
+         display("Multiple_Products");
+         
+      });
    }
+
+   public static ImageView getImageView(int id, String url) {
+      
+      ImageView imageView = new ImageView();
+      Label statusLabel = new Label("↺");
+      statusLabel.setStyle("-fx-font-size: 25px; -fx-text-fill: green;");
+      StackPane root = new StackPane(imageView, statusLabel);
+      StackPane.setAlignment(statusLabel, Pos.CENTER);
+      
+      // Load the image asynchronously
+      loadImageAsync(url, imageView, statusLabel);
+      imagesCache.putIfAbsent(id, imageView);
+      return imageView;
+   }
+
+   private static final ExecutorService executorService = Executors.newCachedThreadPool();
+   private static void loadImageAsync(String imageUrl, ImageView imageView, Label statusLabel) {
+      Task<Image> loadImageTask = new Task<>() {
+         @Override
+         protected Image call() throws Exception {
+            // Simulate delay to mimic slow network
+            // Thread.sleep(1000); // Simulate network delay
+            return new Image(imageUrl, Frame.WIDTH, Frame.IMAGE_HEIGHT, true, true);
+         }
+      };
+      // Update UI on success
+      loadImageTask.setOnSucceeded(event -> {
+         Image image = loadImageTask.getValue();
+         imageView.setImage(image);
+         statusLabel.setVisible(false);
+      });
+      // Handle failure (e.g., network error)
+      loadImageTask.setOnFailed(event -> {
+         statusLabel.setText("☹️");
+      });
+      // Run the task in the background
+      executorService.submit(loadImageTask);
+   }
+   
+   @Override
+   public void stop() {
+      executorService.shutdown();  // Shut down the thread pool on exit
+   }
+
 
    @FXML
    void profile(ActionEvent event) {
@@ -95,7 +162,7 @@ public class Runner extends Application {
       if(user.isAdmin) {
          myadminChoices.getItems().addAll(new String[] {
             "Add Product", "Edit Product", "Delete Product",
-            "Delete user account", "Review purchase movement",
+            "Delete user account", "Review purchase history",
             "Add Admin account"
          });
          myadminChoices.setVisible(true);
@@ -134,12 +201,13 @@ public class Runner extends Application {
       } catch (Exception e) {
          System.out.println("Error in display method when displaying " + fxmlScreen);
          System.out.println(e);
-         // e.printStackTrace();
+         e.printStackTrace();
       }
    }
    
    public void OnShopping(ActionEvent event) {
       display("Home");
+      categoryLabel.setVisible(true);
    }
    
    public void login_button(ActionEvent event) {
@@ -175,10 +243,16 @@ public class Runner extends Application {
          // display("");   // omar page
       }else {
          // display all items
+         String str_ids = trie.stackTrieNodes.peek().ids.toString().replace('[', '(').replace(']', ')');
+         DB.execQuery("""
+            CREATE OR REPLACE VIEW TEMP_VIEW AS
+            SELECT PRODUCT_ID, PRODUCT_NAME, PRICE, RATE, DISCOUNT, BRAND, IMAGE_URL FROM PRODUCTS WHERE PRODUCT_ID IN 
+         """ + str_ids);
+         MultipleProducts.current = DB.execQuery("SELECT * FROM TEMP_VIEW");
+         display("Multiple_Products");
       }
       searchSuggestions.getItems().clear();
       searchSuggestions.setVisible(false);
-      // display("SearchScreen");
    }
    
    public static void showAlert(String title, String content) {

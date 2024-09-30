@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="contentscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MultipleProducts">
+   <children>
+      <ListView fx:id="products" layoutX="312.0" prefHeight="880.0" prefWidth="1400.0" />
+      <ScrollPane fitToWidth="true" layoutY="-1.0" prefWidth="310.0">
+         <content>
+            <VBox alignment="TOP_CENTER" prefHeight="880.0" prefWidth="310.0" spacing="30.0" style="-fx-background-color: #f0fffe;">
+               <children>
+                  <Pane minHeight="125.0" prefHeight="125.0" prefWidth="255.0" styleClass="vbox-filter" stylesheets="@style.css">
+                     <children>
+                        <Label layoutX="15.0" layoutY="7.0" prefHeight="28.0" prefWidth="62.0" stylesheets="@style.css" text="Price" textFill="#0076ff">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="TOP" layoutX="42.0" layoutY="51.0" prefHeight="19.0" prefWidth="40.0" stylesheets="@style.css" text="Min" translateY="2.0">
+                           <font>
+                              <Font name="Sitka Text" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="167.0" layoutY="50.0" prefHeight="20.0" prefWidth="44.0" stylesheets="@style.css" text="Max" translateY="2.0">
+                           <font>
+                              <Font name="Sitka Text" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="minPrice" alignment="CENTER" layoutX="26.0" layoutY="83.0" prefHeight="30.0" prefWidth="75.0" style="-fx-border-color: #0076ff; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@style.css">
+                           <font>
+                              <Font name="Folio Medium BT" size="14.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="maxPrice" layoutX="154.0" layoutY="83.0" prefHeight="30.0" prefWidth="75.0" style="-fx-border-color: #0076ff; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@style.css">
+                           <font>
+                              <Font name="Folio Medium BT" size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </Pane>
+                  <Pane minHeight="125.0" prefHeight="130.0" prefWidth="255.0" styleClass="vbox-filter" stylesheets="@style.css">
+                     <children>
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="9.0" prefHeight="13.0" prefWidth="60.0" stylesheets="@style.css" text="Rate" textFill="#0076ff">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="TOP" layoutX="48.0" layoutY="55.0" prefHeight="19.0" prefWidth="40.0" stylesheets="@style.css" text="Min" translateY="2.0">
+                           <font>
+                              <Font name="Sitka Text" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="166.0" layoutY="53.0" prefHeight="27.0" prefWidth="39.0" stylesheets="@style.css" text="Max" translateY="2.0">
+                           <font>
+                              <Font name="Sitka Text" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="minRate" alignment="CENTER" layoutX="31.0" layoutY="86.0" prefHeight="30.0" prefWidth="75.0" style="-fx-border-color: #0076ff; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@style.css">
+                           <font>
+                              <Font name="Folio Medium BT" size="14.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="maxRate" alignment="CENTER" layoutX="150.0" layoutY="87.0" prefHeight="30.0" prefWidth="75.0" style="-fx-border-color: #0076ff; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@style.css">
+                           <font>
+                              <Font name="Folio Medium BT" size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </Pane>
+                  <VBox fx:id="brandVBox" prefHeight="203.0" prefWidth="0.0" spacing="10.0" styleClass="vbox-filter" stylesheets="@style.css">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="20.0" prefWidth="74.0" stylesheets="@style.css" text="Brand" textFill="#0076ff">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <CheckBox contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="148.0" stylesheets="@style.css" text="Discount" textFill="#0076ff">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </CheckBox>
+                  <Button mnemonicParsing="false" onAction="#filter" styleClass="filter-button" stylesheets="@style.css" text="Filter">
+                     <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="50.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

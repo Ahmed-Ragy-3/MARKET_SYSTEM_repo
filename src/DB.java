@@ -11,11 +11,13 @@ public class DB {
     public final static String PASSWORD = "marketdb";
 
     public static ResultSet execQuery(String query) {
-        ResultSet resultSet;
-        
+        ResultSet resultSet = null;
+        Connection connection = null;
+        Statement statement = null;
+        System.out.println(query);
         try {
-            Connection connection = DriverManager.getConnection(JDBCURL, USERNAME, PASSWORD);
-            Statement statement = connection.createStatement();
+            connection = DriverManager.getConnection(JDBCURL, USERNAME, PASSWORD);
+            statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
             // statement.executeQuery("COMMIT");
             return resultSet;
@@ -24,7 +26,9 @@ public class DB {
             System.out.println("SQL Exception in execQuery method in DB Class");
             System.out.println(e);
             //e.printStackTrace();
-        }
+        
+        } 
+            
         return null;
     }
 
