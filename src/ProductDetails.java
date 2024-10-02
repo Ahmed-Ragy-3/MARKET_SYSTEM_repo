@@ -1,9 +1,119 @@
+import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.image.Image;
+import java.util.ResourceBundle;
 
-public class Product {
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+
+public class ProductDetails implements Initializable{
+   public static String prev_page;
+   public static int id;
+
+   @FXML
+   private ImageView image;
+   @FXML
+   private Label name;
+   @FXML
+   private Label price;
+   @FXML
+   private Label brand;
+   @FXML
+   private Label category;
+   @FXML
+   private Label rate;
+   @FXML
+   private ProgressBar rateBar;
+   @FXML
+   private Label description;
+   @FXML
+   private Label features;
+   @FXML
+   private Label balance;
+
+   @FXML
+   private VBox featuresVbox;
+
+   private int current_image = 0;
+   List<Image> images = new ArrayList<>();
+
+   @Override
+   public void initialize(URL location, ResourceBundle resources) {
+      ResultSet res = DB.execQuery("SELECT * FROM PRODUCTS WHERE PRODUCT_ID = " + id);
+      try {
+         res.next();
+         
+         images.add(Runner.getImageView(id, res.getString(8)).getImage());
+         for(String im : res.getString(11).split(",")) {
+            images.add(new Image(im));
+         }
+         image.setImage(images.get(current_image));
+
+         name.setText(name.getText() + res.getString(2));
+         name.autosize();
+         price.setText(price.getText() + res.getString(3));
+         brand.setText(brand.getText() + res.getString(6));
+         category.setText(category.getText() + res.getString(9));
+
+         float rate_num = res.getFloat(4);
+         rate.setText(rate.getText() + rate_num);
+         rateBar.setProgress(rate_num / 5);
+         description.setText(res.getString(13));
+         description.autosize();
+
+         String features_str = res.getString(12);
+         if(features_str == null) {
+            featuresVbox.setVisible(false);
+         }else {
+            features.setText(features_str);
+            features.autosize();
+         }
+      } catch (SQLException e) {
+         System.out.println("In fill method in Product Details");
+         System.out.println(e);
+         // e.printStackTrace();
+      }
+
+      if(Runner.user == null) {
+         balance.setVisible(false);
+      }else {
+         balance.setText(balance.getText() + Runner.user.getBalance());
+      }
+   }
+
+   public static void fill(int id) {
+
+   }
+
+   @FXML
+   private void nextImage(ActionEvent event) {
+      current_image++;
+      image.setImage(images.get(current_image % images.size()));
+   }
+   @FXML
+   void nextImageLabel(MouseEvent event) {
+      nextImage(null);
+   }
+
+   @FXML
+   void back(ActionEvent event) {
+      Runner.display(prev_page);
+   }
+
+   
+}
+
+
+class Product {
 
    private int id, remaining;
    public String name, category, brand, description;

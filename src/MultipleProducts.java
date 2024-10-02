@@ -169,7 +169,9 @@ class ProductFrame extends ListCell<ProductFrame> {
          // data.getStyleClass().add("product-frame");
          data.setOnMouseClicked(event -> {
             System.out.println("display product");
-            // display("");
+            ProductDetails.id = id;
+            ProductDetails.prev_page = "Multiple_Products";
+            Runner.display("ProductDetails");
          });
 
       } catch (SQLException e) {

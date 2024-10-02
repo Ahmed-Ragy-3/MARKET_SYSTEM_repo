@@ -16,6 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -84,10 +85,18 @@ public class Runner extends Application {
       });
 
       searchSuggestions.setOnMouseClicked(event -> {
-         System.out.println(trie.getId(searchSuggestions.getSelectionModel().getSelectedItem()));
+         ProductDetails.fill(trie.getId(searchSuggestions.getSelectionModel().getSelectedItem()));
+         display("ProductDetails");
+      });
+
+      searchSuggestions.setOnKeyPressed(event -> {
+         if(event.getCode() == KeyCode.ENTER) {
+            search_button(null);
+         }
       });
 
       categoriesFilter.getItems().setAll(Home.categoryNames);
+      
       categoriesFilter.setOnAction(event -> {
          DB.execQuery("CREATE OR REPLACE VIEW TEMP_VIEW AS SELECT PRODUCT_ID, PRODUCT_NAME, PRICE, RATE, DISCOUNT, BRAND, IMAGE_URL FROM PRODUCTS WHERE CATEGORY = '"
          + categoriesFilter.getValue() + "'");

@@ -225,3 +225,32 @@ Icons: https://www.flaticon.com/free-icons
    -fx-font-size: 20px;
    -fx-font-weight: bold;
 }
+
+
+/*  Product Details page  */
+.backbutton {
+   -fx-background-color: #000000;
+   -fx-shape: "M 8,10 L 14,14 V 12 H 22 V 8 H 14 L 14,6 L 8,10"; /* SVG path data */
+   -fx-text-fill: white;
+}
+.backbutton:hover {
+   -fx-background-color: #474747;
+}
+
+.upper-buttons {
+   -fx-background-color: black;
+   -fx-background-radius: 35px;
+   -fx-text-fill: white;
+}
+.upper-buttons:hover {
+   -fx-background-color: #272727;
+}
+
+.next-image {
+   -fx-background-color: #00ff04;
+   -fx-shape: "M 8,10 L 14,14 V 12 H 22 V 8 H 14 L 14,6 L 8,10"; /* SVG path data */
+   -fx-text-fill: rgb(0, 0, 0);
+}
+.next-image:hover {
+   -fx-background-color: #00c303;
+}

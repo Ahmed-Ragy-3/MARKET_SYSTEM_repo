@@ -7,26 +7,31 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="880.0" prefWidth="1710.0" styleClass="contentscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserProfile">
    <children>
-      <Label fx:id="username" layoutX="69.0" layoutY="88.0" prefHeight="88.0" prefWidth="286.0" text="user name:" textFill="WHITE">
+      <Label fx:id="username" layoutX="89.0" layoutY="88.0" prefHeight="88.0" prefWidth="286.0" text="user name: " textFill="WHITE">
          <font>
-            <Font size="48.0" />
+            <Font name="System Bold Italic" size="48.0" />
          </font>
       </Label>
-      <Label fx:id="balance" layoutX="65.0" layoutY="190.0" prefHeight="117.0" prefWidth="339.0" text="Balance:" textFill="WHITE">
+      <Label fx:id="balance" layoutX="85.0" layoutY="180.0" prefHeight="117.0" prefWidth="339.0" text="Balance: " textFill="WHITE">
          <font>
-            <Font size="48.0" />
+            <Font name="System Bold Italic" size="48.0" />
          </font>
       </Label>
-      <ListView layoutX="1382.0" layoutY="111.0" prefHeight="736.0" prefWidth="300.0" />
-      <Label layoutX="1484.0" layoutY="32.0" prefHeight="45.0" prefWidth="108.0" text="Cart" textFill="WHITE">
+      <ListView fx:id="cartList" layoutX="1375.0" layoutY="105.0" prefHeight="736.0" prefWidth="283.0" />
+      <Label layoutX="1459.0" layoutY="21.0" prefHeight="81.0" prefWidth="113.0" text="Cart" textFill="WHITE">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
       </Label>
-      <ListView layoutX="75.0" layoutY="641.0" prefHeight="200.0" prefWidth="1220.0" />
-      <Label layoutX="83.0" layoutY="570.0" prefHeight="53.0" prefWidth="210.0" text="Suggestions" textFill="WHITE">
+      <ListView fx:id="suggestions" layoutX="75.0" layoutY="585.0" orientation="HORIZONTAL" prefHeight="249.0" prefWidth="1220.0" />
+      <Label layoutX="83.0" layoutY="494.0" prefHeight="69.0" prefWidth="246.0" text="Suggestions" textFill="WHITE">
          <font>
-            <Font name="System Bold Italic" size="36.0" />
+            <Font name="System Bold Italic" size="40.0" />
+         </font>
+      </Label>
+      <Label fx:id="admin" layoutX="86.0" layoutY="291.0" prefHeight="117.0" prefWidth="339.0" text="Admin: " textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="48.0" />
          </font>
       </Label>
    </children>
