@@ -65,12 +65,12 @@
                               <Font name="Sitka Text" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="minRate" alignment="CENTER" layoutX="31.0" layoutY="86.0" prefHeight="30.0" prefWidth="75.0" style="-fx-border-color: #0076ff; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@style.css">
+                        <TextField fx:id="minRate" alignment="CENTER" layoutX="31.0" layoutY="86.0" prefHeight="30.0" prefWidth="75.0" promptText="0" style="-fx-border-color: #0076ff; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@style.css">
                            <font>
                               <Font name="Folio Medium BT" size="14.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="maxRate" alignment="CENTER" layoutX="150.0" layoutY="87.0" prefHeight="30.0" prefWidth="75.0" style="-fx-border-color: #0076ff; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@style.css">
+                        <TextField fx:id="maxRate" alignment="CENTER" layoutX="150.0" layoutY="87.0" prefHeight="30.0" prefWidth="75.0" promptText="5" style="-fx-border-color: #0076ff; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@style.css">
                            <font>
                               <Font name="Folio Medium BT" size="14.0" />
                            </font>
@@ -86,9 +86,9 @@
                         </Label>
                      </children>
                   </VBox>
-                  <CheckBox contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="148.0" stylesheets="@style.css" text="Discount" textFill="#0076ff">
+                  <CheckBox fx:id="discount" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="148.0" stylesheets="@style.css" text="Discount" textFill="#0076ff">
                      <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font name="System Bold" size="22.0" />
                      </font>
                   </CheckBox>
                   <Button mnemonicParsing="false" onAction="#filter" styleClass="filter-button" stylesheets="@style.css" text="Filter">

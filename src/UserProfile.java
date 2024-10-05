@@ -131,12 +131,11 @@ class User {
 
 
    public static void insertUser(String username, String password) {
-      System.out.println("INSERT INTO USERS VALUES (NULL, \'" + username + "\', \'" + password + "\', 0, 0);");
-      DB.execQuery("INSERT INTO USERS VALUES (NULL, \'" + username + "\', \'" + password + "\', 0, 0)");
+      DB.execQuery("INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, \'" + username + "\', \'" + password + "\', 0, num_arr())");
       // DB.execQuery("COMMIT;");
    }
 
-   private static boolean isAdmin(String name) {
+   public static boolean isAdmin(String name) {
       List<String> lines = null;
       try {
          lines = Files.readAllLines(Paths.get("Admins.txt"));

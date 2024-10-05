@@ -56,7 +56,6 @@ public class Home /*extends Thread*/ implements Initializable {
       for (categoryIndex = 0; categoryIndex < 8; categoryIndex++) {
          System.out.println(categoryNames[categoryIndex]);
          CategoryFrame cat_frame = new CategoryFrame(categoryNames[categoryIndex]);
-         // this.start();
          if(!empty_category) {
             categories.getItems().add(cat_frame);
          } else {

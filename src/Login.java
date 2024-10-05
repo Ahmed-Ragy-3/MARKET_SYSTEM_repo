@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -9,7 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 public class Login {
-   private boolean haveAccount = true;
+   public static boolean haveAccount = true;
+   public static boolean fromAdmin = false;
 
    @FXML
    private AnchorPane rootPane;
@@ -23,9 +26,22 @@ public class Login {
    private Text confirm;
 
    @FXML
+   public void initialize() {
+      if(fromAdmin) {
+         submit.setText("Create");
+         submit.setLayoutY(submit.getLayoutY() + 90);
+   
+         confirm.setVisible(true);
+         cna.setVisible(false);
+         cna1.setVisible(false);
+         password2.setVisible(true);
+      }
+   }
+
+   @FXML
    void create_new_account(ActionEvent event) {
-      if(this.haveAccount) {
-         this.haveAccount = false;
+      if(haveAccount) {
+         haveAccount = false;
          submit.setText("Create");
          submit.setLayoutY(submit.getLayoutY() + 90);
    
@@ -34,7 +50,7 @@ public class Login {
          cna1.setVisible(true);
          password2.setVisible(true);
       }else {
-         this.haveAccount = true;
+         haveAccount = true;
          submit.setText("Sign in");
          submit.setLayoutY(submit.getLayoutY() - 90);
    
@@ -60,7 +76,7 @@ public class Login {
          System.out.println("SQL EXCEPTION in submit_button method");
       }
 
-      if(this.haveAccount) {
+      if(haveAccount) {
          if(!exist) {
             Runner.showAlert("Invalid Username", "Username is not found\nEnter Valid Username");
             return;
@@ -88,7 +104,25 @@ public class Login {
          User.insertUser(name, password1.getText());
       }
 
-      Runner.setUser(name);
+      if(fromAdmin) {
+         if(User.isAdmin(name)) {
+            Runner.showAlert("Used Name", "Name is used before\nEnter another username");
+            return;
+         }
+         try {
+            FileWriter writer = new FileWriter("Admins.txt", true);
+
+            writer.write(name + "\n");
+            writer.close();
+
+            System.out.println(name + " added successfully");
+        } catch (IOException e) {
+            System.out.println("An error occurred in adding admin");
+            // e.printStackTrace();
+        }
+      }else {
+         Runner.setUser(name);
+      }
       Runner.display("Home");
    }
 

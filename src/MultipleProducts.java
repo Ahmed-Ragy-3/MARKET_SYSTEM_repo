@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,6 +29,9 @@ public class MultipleProducts implements Initializable {
    
    @FXML
    private VBox brandVBox;
+   
+   @FXML
+   private CheckBox discount;
 
    @FXML
    private TextField minPrice, maxPrice;
@@ -37,6 +41,8 @@ public class MultipleProducts implements Initializable {
 
    @FXML
    private ListView<ProductFrame> products;
+   
+   private ListView<ProductFrame> myproducts = new ListView<>();
 
    public static Set<String> allBrands = new HashSet<>();
    public static List<String> brandsFiltered = new ArrayList<>();
@@ -44,6 +50,11 @@ public class MultipleProducts implements Initializable {
 
    @Override
    public void initialize(URL location, ResourceBundle resources) {
+      if(!myproducts.getItems().isEmpty()) {
+         // System.out.println("lkeowdwefewfe");
+         products.getItems().setAll(myproducts.getItems());
+         return;
+      }
       products.setCellFactory(lv -> {
          ProductFrame cell = new ProductFrame();
          cell.autosize();
@@ -82,6 +93,7 @@ public class MultipleProducts implements Initializable {
          System.out.println(e);
          // e.printStackTrace();
       }
+      myproducts.getItems().addAll(products.getItems());
    }
 
    @FXML
@@ -91,12 +103,22 @@ public class MultipleProducts implements Initializable {
       minPrice.setText((minPrice.getText().equals("")) ? "0" : minPrice.getText());
       maxPrice.setText((maxPrice.getText().equals("")) ? Float.toString(max_price) : maxPrice.getText());
 
-      current = DB.execQuery(" SELECT * FROM TEMP_VIEW WHERE PRICE BETWEEN " +
-      minPrice.getText() + " AND "  + maxPrice.getText() + " AND RATE BETWEEN " + minRate.getText() + 
-      " AND " + maxRate.getText() + " AND BRAND IN " + 
-      brandsFiltered.toString().replaceAll("'", "''").replace("[", "('").
-      replace("]", "')").replaceAll(", ", "','"));
+      StringBuilder strb = new StringBuilder("""
+         SELECT * FROM TEMP_VIEW WHERE PRICE BETWEEN %s AND %s 
+         AND RATE BETWEEN %s AND %s 
+         AND BRAND IN %s
+      """.formatted(
+         minPrice.getText(), maxPrice.getText(),
+         minRate.getText(), maxRate.getText(),
+         brandsFiltered.toString().replaceAll("'", "''").replace("[", "('").
+         replace("]", "')").replaceAll(", ", "','")
+      ));
       
+      if(discount.isSelected()) {
+         strb.append(" AND DISCOUNT IS NOT NULL");
+      }
+      current = DB.execQuery(strb.toString());
+
       products.getItems().clear();
 
       try {

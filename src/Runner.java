@@ -18,7 +18,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Runner extends Application {
@@ -89,7 +88,7 @@ public class Runner extends Application {
          display("ProductDetails");
       });
 
-      searchSuggestions.setOnKeyPressed(event -> {
+      searchBar.setOnKeyPressed(event -> {
          if(event.getCode() == KeyCode.ENTER) {
             search_button(null);
          }
@@ -98,36 +97,32 @@ public class Runner extends Application {
       categoriesFilter.getItems().setAll(Home.categoryNames);
       
       categoriesFilter.setOnAction(event -> {
-         DB.execQuery("CREATE OR REPLACE VIEW TEMP_VIEW AS SELECT PRODUCT_ID, PRODUCT_NAME, PRICE, RATE, DISCOUNT, BRAND, IMAGE_URL FROM PRODUCTS WHERE CATEGORY = '"
-         + categoriesFilter.getValue() + "'");
+         DB.execQuery("""
+            CREATE OR REPLACE VIEW TEMP_VIEW 
+            AS SELECT PRODUCT_ID, PRODUCT_NAME, PRICE, RATE, DISCOUNT, BRAND, IMAGE_URL FROM PRODUCTS WHERE CATEGORY = '%s';
+            """.formatted(categoriesFilter.getValue())
+         );
          MultipleProducts.current = DB.execQuery("SELECT * FROM TEMP_VIEW");
          categoryLabel.setVisible(false);
          display("Multiple_Products");
-         
       });
    }
 
    public static ImageView getImageView(int id, String url) {
       
       ImageView imageView = new ImageView();
-      Label statusLabel = new Label("↺");
-      statusLabel.setStyle("-fx-font-size: 25px; -fx-text-fill: green;");
-      StackPane root = new StackPane(imageView, statusLabel);
-      StackPane.setAlignment(statusLabel, javafx.geometry.Pos.CENTER);
       
       // Load the image asynchronously
-      loadImageAsync(url, imageView, statusLabel);
+      loadImageAsync(url, imageView);
       imagesCache.putIfAbsent(id, imageView);
       return imageView;
    }
 
    private static final java.util.concurrent.ExecutorService executorService = java.util.concurrent.Executors.newCachedThreadPool();
-   private static void loadImageAsync(String imageUrl, ImageView imageView, Label statusLabel) {
+   private static void loadImageAsync(String imageUrl, ImageView imageView) {
       Task<Image> loadImageTask = new Task<>() {
          @Override
          protected Image call() throws Exception {
-            // Simulate delay to mimic slow network
-            // Thread.sleep(1000); // Simulate network delay
             return new Image(imageUrl, Frame.WIDTH, Frame.IMAGE_HEIGHT, true, true);
          }
       };
@@ -135,11 +130,10 @@ public class Runner extends Application {
       loadImageTask.setOnSucceeded(event -> {
          Image image = loadImageTask.getValue();
          imageView.setImage(image);
-         statusLabel.setVisible(false);
       });
       // Handle failure (e.g., network error)
       loadImageTask.setOnFailed(event -> {
-         statusLabel.setText("☹️");
+         System.out.println("Failed to load image");
       });
       // Run the task in the background
       executorService.submit(loadImageTask);
@@ -189,8 +183,11 @@ public class Runner extends Application {
          ProductController.status = "Delete";
          display("Product");
 
-      } else if(choice.compareTo("Review purchase history") == 0) {
-         
+      } else if(choice.compareTo("Add Admin account") == 0) {
+         Login.fromAdmin = true;
+         Login.haveAccount = false;
+         display("Login");
+
       } else {
          
       }
