@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.VBox;
 
-public class Home /*extends Thread*/ implements Initializable {
+public class Home implements Initializable {
    public static byte categoryIndex;
    private static boolean loaded = false;
    

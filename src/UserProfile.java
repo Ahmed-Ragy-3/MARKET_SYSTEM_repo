@@ -1,9 +1,11 @@
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -38,10 +40,19 @@ public class UserProfile implements Initializable {
       admin.setText(admin.getText() + ((user.isAdmin) ? " ✓" : " ✕"));
 
       if(user.getCart() != null) {
+         ResultSet res;
          for(int prod : user.getCart()) {
-            cartList.getItems().add(new Frame(DB.execQuery("SELECT * FROM PRODUCTS WHERE PRODUCT_ID = " + prod)));
+            System.out.println("prod = " + prod);
+            res = DB.execQuery("SELECT * FROM PRODUCTS WHERE PRODUCT_ID = " + prod);
+            try {
+               res.next();
+            } catch (SQLException e) {}
+            cartList.getItems().add(new Frame(res));
          }
       }
+      // for(Suggestion sug : user.getSuggestions()) {
+      //    suggestions.getItems().add();
+      // }
    }
    
 }
@@ -89,17 +100,20 @@ class User {
       if(DB.emptyQuery(res))  return;
 
       try {
-         res.next();
+         if(!res.next()) return;
          setId(res.getInt("USER_ID"));
          username = res.getString("USERNAME"); 
          setPassword(res.getString("PASSWORD"));
          balance = res.getFloat("BALANCE");
-
+         
          java.sql.Array array = res.getArray("CART");
          if(array == null) {
-            cart = null;
+            cart = new ArrayList<>();
          }else {
-            cart = Arrays.asList((Integer[]) array.getArray());
+            BigDecimal[] bigDecimalArray = (BigDecimal[]) array.getArray();
+            cart = Arrays.asList(Arrays.stream(bigDecimalArray)
+                          .map(BigDecimal::intValue) // Convert BigDecimal to Integer
+                          .toArray(Integer[]::new));
          }
          
          ResultSet res2 = DB.execQuery("SELECT PRODUCT_ID, SENDER_ID, IS_SEEN FROM SUGGESTIONS WHERE RECIEVER_ID = " + this.id);
@@ -131,7 +145,8 @@ class User {
 
 
    public static void insertUser(String username, String password) {
-      DB.execQuery("INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, \'" + username + "\', \'" + password + "\', 0, num_arr())");
+      DB.execQuery("INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, '%s', '%s', 0, num_arr())"
+      .formatted(username, password));
       // DB.execQuery("COMMIT;");
    }
 
@@ -150,14 +165,6 @@ class User {
       return false;
    }
 
-   private void addToCart(int prod_id) {
-      DB.execQuery("""
-         UPDATE USERS
-         SET CART = CART || num_arr(%d)
-         WHERE USER_ID = %d
-         AND %d NOT MEMBER OF CART;
-      """.formatted(prod_id, id, prod_id));
-   }
    private void deleteFromCart(int prod_id) {
       DB.execQuery("""
          UPDATE USERS

@@ -84,7 +84,9 @@ public class Runner extends Application {
       });
 
       searchSuggestions.setOnMouseClicked(event -> {
-         ProductDetails.fill(trie.getId(searchSuggestions.getSelectionModel().getSelectedItem()));
+         ProductDetails.id = trie.getId(searchSuggestions.getSelectionModel().getSelectedItem());
+         ProductDetails.prev_page = "Home";
+         searchSuggestions.setVisible(false);
          display("ProductDetails");
       });
 

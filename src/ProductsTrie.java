@@ -152,18 +152,6 @@ public class ProductsTrie extends Thread implements Serializable {
       stackTrieNodes.pop();
    }
 
-   // public static void saveTrie(ProductsTrie trie, String filePath) throws IOException {
-   //    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
-   //       oos.writeObject(trie);
-   //    }
-   // }
-   
-   // public static ProductsTrie loadTrie(String filePath) throws IOException, ClassNotFoundException {
-   //    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
-   //       return (ProductsTrie) ois.readObject();
-   //    }
-   // }
-
    public static void main(String[] args) {
       // building trie
    }

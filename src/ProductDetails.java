@@ -8,12 +8,18 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 public class ProductDetails implements Initializable{
    public static String prev_page;
@@ -24,7 +30,7 @@ public class ProductDetails implements Initializable{
    @FXML
    private Label name;
    @FXML
-   private Label price;
+   private TextFlow price;
    @FXML
    private Label brand;
    @FXML
@@ -39,34 +45,69 @@ public class ProductDetails implements Initializable{
    private Label features;
    @FXML
    private Label balance;
+   @FXML
+   private Button add_to_cart;
+   @FXML
+   private Button suggestButton;
+   @FXML
+   private Button buy;
 
    @FXML
    private VBox featuresVbox;
+   @FXML
+   private Pane suggestPane;
+   @FXML
+   private TextField recieverUserName;
+
+   private float p;
 
    private int current_image = 0;
    List<Image> images = new ArrayList<>();
 
-   @Override
+   @FXML
    public void initialize(URL location, ResourceBundle resources) {
       ResultSet res = DB.execQuery("SELECT * FROM PRODUCTS WHERE PRODUCT_ID = " + id);
       try {
          res.next();
-         
-         images.add(Runner.getImageView(id, res.getString(8)).getImage());
+
+         ImageView imageView = Runner.getImageView(id, res.getString(8));
+         imageView.imageProperty().addListener((obs, oldImage, newImage) -> {
+            if (newImage != null) {
+               images.add(newImage);
+               image.setImage(images.get(0)); // Set the first image
+            }
+         });
+
+         // images.add(Runner.getImageView(id, res.getString(8)).getImage());
          for(String im : res.getString(11).split(",")) {
-            images.add(new Image(im));
+            images.add(new Image(im, 235, 255, true, true));
          }
-         image.setImage(images.get(current_image));
+         image.setImage(images.get(0));
 
          name.setText(name.getText() + res.getString(2));
          name.autosize();
-         price.setText(price.getText() + res.getString(3));
+
+         p = res.getFloat(3);
+         float discount =  res.getFloat(5);
+         Text t1 = new Text("Price: ");
+         Text t2 = new Text(Float.toString(p));
+
+         if(discount == 0) {
+            price.getChildren().setAll(t1, t2);
+            
+         }else {
+            t2.setStrikethrough(true);
+            p -= (discount / 100) * p; 
+            price.getChildren().setAll(t1, t2, new Text(Float.toString(p)));
+         }
+         
          brand.setText(brand.getText() + res.getString(6));
          category.setText(category.getText() + res.getString(9));
 
          float rate_num = res.getFloat(4);
          rate.setText(rate.getText() + rate_num);
          rateBar.setProgress(rate_num / 5);
+
          description.setText(res.getString(13));
          description.autosize();
 
@@ -85,13 +126,13 @@ public class ProductDetails implements Initializable{
 
       if(Runner.user == null) {
          balance.setVisible(false);
+         add_to_cart.setVisible(false);
+         suggestButton.setVisible(false);
+         buy.setVisible(false);
+
       }else {
          balance.setText(balance.getText() + Runner.user.getBalance());
       }
-   }
-
-   public static void fill(int id) {
-
    }
 
    @FXML
@@ -109,6 +150,57 @@ public class ProductDetails implements Initializable{
       Runner.display(prev_page);
    }
 
+   @FXML
+   void addToCart(ActionEvent event) {
+      DB.execQuery("""
+         UPDATE USERS
+         SET CART = CART || num_arr(%d)
+         WHERE USER_ID = %d
+         AND %d NOT MEMBER OF CART;
+      """.formatted(id, Runner.user.getId(), id));
+   }
+
+   @FXML
+   void buyProduct(ActionEvent event) {
+      if(Runner.user.balance < p) {
+         Runner.showAlert("No enough balance", "Your Balance is not enough\nfor buying this product");
+         return;
+      }
+      Runner.user.balance -= p;
+      balance.setText("Balance: " + Runner.user.balance);
+      DB.execQuery("""
+         UPDATE USERS 
+         SET BALANCE = %d 
+         WHERE USER_ID = %d
+      """.formatted(Runner.user.balance, Runner.user.getId()));
+
+   }
+   
+   @FXML
+   void suggest(ActionEvent ev) {
+      suggestPane.setVisible(true);
+      
+      recieverUserName.setOnKeyPressed(event -> {
+         if(event.getCode() == KeyCode.ENTER) {
+            ResultSet res = DB.execQuery("SELECT USER_ID FROM USERS WHERE USERNAME = '" + recieverUserName.getText() + "'");
+            if(DB.emptyQuery(res)) {
+               Runner.showAlert("Invalid Username","Username is not found");
+            }else {
+               try {
+                  res.next();
+                  int recieverId = res.getInt(1);
+                  DB.execQuery("INSERT INTO SUGGESTIONS VALUES (%d, %d, %d, %d)"
+                  .formatted(Runner.user.getId(), recieverId, id, 0));
+               } catch (SQLException e) {
+                  System.out.println("In suggest in ProductDetails");
+                  // e.printStackTrace();
+               }
+            }
+            suggestPane.setVisible(false);
+         }
+      });
+            
+   }
    
 }
 
