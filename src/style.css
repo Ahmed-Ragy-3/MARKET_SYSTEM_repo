@@ -1,0 +1,262 @@
+/*
+Create all needed style classes for GUI Objects 
+Css Tutorial: https://www.w3schools.com/Css/default.asp
+Color wheel: https://www.canva.com/colors/color-wheel/?msockid=065c61157ede61032f3b72927fa26043
+Icons: https://www.flaticon.com/free-icons
+*/
+
+.fullscreen {
+   /* -fx-background-size: 1710px 1010px; */
+   -fx-pref-height: 1010px;
+   -fx-pref-width: 1710px;
+   -fx-background-color: #1A1A1A;
+}
+.contentscreen {
+   /* -fx-background-size: 1710px 880px; */
+   -fx-pref-height: 880px;
+   -fx-pref-width: 1710px;
+   -fx-background-color: #1A1A1A;
+}
+
+
+/*  Home_bar  */
+.searchbutton {
+   -fx-background-color: #ffffff;
+   -fx-shape: "M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z";
+   -fx-border-width: 2px;
+}
+.searchbutton:hover {
+   -fx-background-color: #00ff2a;
+}
+
+.searchbar {
+   -fx-background-color: #0d0d0d;
+   -fx-background-radius: 35px;
+
+   -fx-border-color: #2eff35;
+   -fx-border-width: 1px;
+   -fx-border-radius: 35px;
+   
+   -fx-text-fill: #bdbdbd;
+   
+   -fx-padding: 0 0 0 21;
+   -fx-pref-height: 50px;
+   -fx-pref-width: 550px;
+}
+
+.mybutton {
+   -fx-background-color: transparent;
+   -fx-border-width: 2px;
+   -fx-border-radius: 50px;
+   -fx-border-color: #ffffff;
+   -fx-text-fill: #ffffff;
+   -fx-font-size: 35px;
+}
+.mybutton:hover {
+   -fx-border-color: #00ff2a;
+   -fx-text-fill: #00ff2a;
+}
+
+.suggestions {
+   -fx-background-color: #040013;
+   -fx-border-color: #0092ec;
+   -fx-border-width: 0.2px;
+   -fx-text-fill: #e1e1e1;
+   -fx-pref-height: 40px;
+
+   -fx-font-size: 15px;
+   -fx-font-weight: bold;
+}
+.suggestions:hover {
+   -fx-background-color: #002147;
+}
+
+
+/*  Login Page  */
+.cna {
+   -fx-background-color: transparent;
+   -fx-text-fill: #00e5ff;
+}
+.cna:hover {
+   -fx-text-fill: #0037ff;
+}
+
+
+/* Home page   */
+.productbutton {
+   -fx-background-color: rgb(255, 201, 114);
+   -fx-text-fill: #ffffff;
+   -fx-background-radius: 50px;
+   -fx-border-radius: 50px;
+   -fx-border-color: #ffffff;
+   -fx-border-width: 4px;
+}
+.productbutton:hover {
+   -fx-background-color: #c98200;
+}
+
+.category-cell {
+   -fx-background-color: black;
+   -fx-padding: 30px;
+   -fx-border-color: rgb(25, 255, 25);
+   -fx-border-width: 6px;
+}
+
+.category-label {
+   -fx-text-fill: rgb(37, 227, 37);
+   -fx-font-size: 40px;
+   -fx-font-weight: bold;
+   -fx-alignment: center;
+   -fx-padding: 10px;
+}
+
+.list-view-categoryframe {
+   -fx-background-color: black;
+   -fx-border-color: black;
+   /* -fx-padding: 20px; */
+}
+
+.frame-cell {
+   -fx-background-color: #303030;
+   -fx-text-fill: rgb(255, 255, 255);
+   -fx-font-size: 40px;
+   -fx-alignment: center;
+   -fx-border-width: 0.25px;
+   -fx-border-color: rgb(255, 255, 255);
+   /* -fx-padding: 10px; */
+   -fx-spacing: 20px;
+}
+
+.frame-cell:hover {
+   -fx-background-color: #4e4e4e;
+   /* -fx-cursor: hand; */
+}
+
+.image-view {
+   -fx-border-color: #00ff00;
+   -fx-border-width: 50px;
+}
+
+.product-name {
+   -fx-text-fill: #e5ff00;
+   -fx-font-size: 20px;
+   -fx-font-weight: bold;
+   -fx-padding: 1px;
+}
+.product-name:hover {
+   -fx-text-fill: #a8bb00;
+}
+
+/* Product.fxml */
+.product-bars {
+   -fx-background-color: #ebffe9;
+   -fx-background-radius: 35px;
+   /* -fx-border-width: 0.5px;
+   -fx-border-color: #0dff00;
+   -fx-border-radius: 25px; */
+   -fx-text-fill: #000000;
+}
+
+.prod-labels {
+   -fx-text-fill: #fff764;
+}
+
+.status-button {
+   -fx-background-color: black;
+   -fx-text-fill: #fff200;
+   -fx-border-color: #fff200;
+   -fx-border-radius: 40px;
+   -fx-background-radius: 40px;
+}
+.status-button:hover {
+   -fx-background-color: #fff200;
+   -fx-text-fill: black;
+}
+
+/*  Multiple Products Page  */ 
+.product-frame-texts {
+   -fx-text-fill: #000000;
+   -fx-font-size: 25px;
+   -fx-font-weight: bold;
+   /* -fx-padding: 1px; */
+   -fx-wrap-text: true;
+}
+
+.product-frame {
+   /* -fx-padding: 10px; */
+   -fx-border-color: #000000;
+   -fx-border-width: 5px;
+   -fx-spacing: 3px;
+}
+.product-frame:hover {
+   -fx-background-color: #dffdff;
+}
+
+.filter-button {
+   -fx-background-color: transparent;
+   -fx-border-color: black;
+   -fx-border-radius: 25px;
+   -fx-border-width: 2px;
+}
+.filter-button:hover {
+   -fx-background-color: black;
+   -fx-text-fill: white;
+   -fx-background-radius: 25px;
+}
+
+.vbox-filter {    /* In scroll bar */
+   -fx-background-color: #fefae7;
+   -fx-background-radius: 10px;
+   -fx-border-radius: 10px;
+   -fx-border-color: #000000;
+   -fx-padding: 15px;
+}
+
+.enter-id {
+   -fx-background-color: black;
+   -fx-background-radius: 35px;
+   -fx-border-color: white;
+   -fx-border-radius: 35px;
+   -fx-text-fill: yellow;
+}
+
+.test {
+   -fx-background-color: #f0fffe;
+   -fx-font-size: 20px;
+   -fx-font-weight: bold;
+}
+
+
+/*  Product Details page  */
+.backbutton {
+   -fx-background-color: #0dff00;
+   -fx-shape: "M 8,10 L 14,14 V 12 H 22 V 8 H 14 L 14,6 L 8,10"; /* SVG path data */
+   -fx-text-fill: rgb(0, 0, 0);
+}
+.backbutton:hover {
+   -fx-background-color: #474747;
+}
+
+.upper-buttons {
+   -fx-background-color: rgb(219, 219, 219);
+   -fx-background-radius: 35px;
+   -fx-text-fill: black;
+}
+.upper-buttons:hover {
+   -fx-background-color: #87ff7c;
+}
+
+.next-image {
+   -fx-background-color: #00ff04;
+   -fx-shape: "M 8,10 L 14,14 V 12 H 22 V 8 H 14 L 14,6 L 8,10"; /* SVG path data */
+   -fx-text-fill: rgb(0, 0, 0);
+}
+.next-image:hover {
+   -fx-background-color: #00c303;
+}
+
+.prod-labels {
+   -fx-text-fill: #0cff00;
+   -fx-font-size: 30px;
+   -fx-font-family: Arial;
+}
