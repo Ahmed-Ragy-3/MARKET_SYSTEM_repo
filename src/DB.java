@@ -21,14 +21,14 @@ public class DB {
             resultSet = statement.executeQuery(query);
             // statement.executeQuery("COMMIT");
             return resultSet;
-            
+
         } catch (SQLException e) {
             System.out.println("SQL Exception in execQuery method in DB Class");
             System.out.println(e);
-            //e.printStackTrace();
-        
-        } 
-            
+            // e.printStackTrace();
+
+        }
+
         return null;
     }
 
@@ -61,7 +61,8 @@ public class DB {
     }
 
     public static void main(String[] args) {
-        // Image image = new Image("https://i5.walmartimages.com/seo/Clinique-City-Block-Sheer-SPF-25-Oil-Free-Daily-Face-Protector-for-Dry-and-Oily-Skin-1-4-oz_727fe7d8-9cc4-49b9-92ce-af2ddade48eb.94221f26fad01b19c31b6ef3d96c97d1.jpeg");
+        // Image image = new
+        // Image("https://i5.walmartimages.com/seo/Clinique-City-Block-Sheer-SPF-25-Oil-Free-Daily-Face-Protector-for-Dry-and-Oily-Skin-1-4-oz_727fe7d8-9cc4-49b9-92ce-af2ddade48eb.94221f26fad01b19c31b6ef3d96c97d1.jpeg");
         // System.out.println(image);
     }
 }

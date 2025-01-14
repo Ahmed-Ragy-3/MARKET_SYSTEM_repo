@@ -19,15 +19,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class MultipleProducts implements Initializable {
-   /* Filter by:
-      Price - Rate - Brand
-      discount (yes or no)
-   */
+   /*
+    * Filter by:
+    * Price - Rate - Brand
+    * discount (yes or no)
+    */
    public static ResultSet current;
-   
+
    @FXML
    private VBox brandVBox;
-   
+
    @FXML
    private CheckBox discount;
 
@@ -39,7 +40,7 @@ public class MultipleProducts implements Initializable {
 
    @FXML
    private ListView<ProductFrame> products;
-   
+
    private ListView<ProductFrame> myproducts = new ListView<>();
 
    public static Set<String> allBrands = new HashSet<>();
@@ -48,7 +49,7 @@ public class MultipleProducts implements Initializable {
 
    @Override
    public void initialize(URL location, ResourceBundle resources) {
-      if(!myproducts.getItems().isEmpty()) {
+      if (!myproducts.getItems().isEmpty()) {
          // System.out.println("lkeowdwefewfe");
          products.getItems().setAll(myproducts.getItems());
          return;
@@ -66,13 +67,13 @@ public class MultipleProducts implements Initializable {
          while (current.next()) {
             products.getItems().add(new ProductFrame(current, false));
          }
-         
-         for(String brand : allBrands) {
+
+         for (String brand : allBrands) {
             CheckBox check = new CheckBox(brand);
             check.setStyle("""
-               -fx-font-size: 18px;
-               -fx-font-weight: bold;
-            """);
+                     -fx-font-size: 18px;
+                     -fx-font-weight: bold;
+                  """);
 
             check.setOnAction(event -> {
                if (check.isSelected()) {
@@ -102,17 +103,16 @@ public class MultipleProducts implements Initializable {
       maxPrice.setText((maxPrice.getText().equals("")) ? Float.toString(max_price) : maxPrice.getText());
 
       StringBuilder strb = new StringBuilder("""
-         SELECT * FROM TEMP_VIEW WHERE PRICE BETWEEN %s AND %s 
-         AND RATE BETWEEN %s AND %s 
-         AND BRAND IN %s
-      """.formatted(
-         minPrice.getText(), maxPrice.getText(),
-         minRate.getText(), maxRate.getText(),
-         brandsFiltered.toString().replaceAll("'", "''").replace("[", "('").
-         replace("]", "')").replaceAll(", ", "','")
-      ));
-      
-      if(discount.isSelected()) {
+               SELECT * FROM TEMP_VIEW WHERE PRICE BETWEEN %s AND %s
+               AND RATE BETWEEN %s AND %s
+               AND BRAND IN %s
+            """.formatted(
+            minPrice.getText(), maxPrice.getText(),
+            minRate.getText(), maxRate.getText(),
+            brandsFiltered.toString().replaceAll("'", "''").replace("[", "('").replace("]", "')").replaceAll(", ",
+                  "','")));
+
+      if (discount.isSelected()) {
          strb.append(" AND DISCOUNT IS NOT NULL");
       }
       current = DB.execQuery(strb.toString());
@@ -135,20 +135,22 @@ class ProductFrame extends ListCell<ProductFrame> {
    VBox texts = new VBox();
    HBox data = new HBox();
 
-   public ProductFrame() {}
+   public ProductFrame() {
+   }
 
    public ProductFrame(int id) {
       this(DB.execQuery("""
-         SELECT PRODUCT_ID, PRODUCT_NAME, PRICE, RATE, DISCOUNT, BRAND, IMAGE_URL FROM PRODUCTS WHERE PRODUCT_ID =  
-      """ + id), true);
+               SELECT PRODUCT_ID, PRODUCT_NAME, PRICE, RATE, DISCOUNT, BRAND, IMAGE_URL FROM PRODUCTS WHERE PRODUCT_ID =
+            """ + id), true);
    }
 
    public ProductFrame(ResultSet res, boolean next) {
       try {
-         if(next) res.next();
+         if (next)
+            res.next();
 
          System.out.println(res.getInt(1));
-         
+
          id = res.getInt(1);
 
          Label text = new Label(res.getString(2));
@@ -183,7 +185,7 @@ class ProductFrame extends ListCell<ProductFrame> {
          image.setFitHeight(Frame.IMAGE_HEIGHT);
          image.setFitWidth(Frame.WIDTH);
          data.getChildren().addAll(image, texts);
-         
+
          data.setSpacing(50);
          data.setMaxWidth(1300);
          // data.getStyleClass().add("product-frame");
@@ -198,7 +200,7 @@ class ProductFrame extends ListCell<ProductFrame> {
          System.out.println("In product frame constructer.");
          System.out.println(e);
       }
-      
+
    }
 
    @Override

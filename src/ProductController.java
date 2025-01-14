@@ -14,7 +14,7 @@ import javafx.scene.input.KeyCode;
 public class ProductController implements Initializable {
    public static String status;
    public static boolean isSelected = false;
-      
+
    @FXML
    private Button statusButton;
 
@@ -34,7 +34,6 @@ public class ProductController implements Initializable {
    @FXML
    private TextField quantity;
 
-   
    @FXML
    private TextArea description;
    @FXML
@@ -48,20 +47,20 @@ public class ProductController implements Initializable {
    public void initialize(URL location, ResourceBundle resources) {
       statusButton.setText(status);
 
-      if(status.equals("Edit") || status.equals("Delete")) {
+      if (status.equals("Edit") || status.equals("Delete")) {
          statusButton.setVisible(false);
          enterId.setVisible(true);
       }
 
       enterId.setOnKeyPressed(event -> {
-         if(event.getCode() == KeyCode.ENTER) {
+         if (event.getCode() == KeyCode.ENTER) {
             enterId.setVisible(false);
             statusButton.setVisible(true);
             try {
                int id = Integer.parseInt(enterId.getText());
                ResultSet res = DB.execQuery("SELECT * FROM PRODUCTS WHERE PRODUCT_ID = " + id);
                res.next();
-               
+
                name.setText(res.getString(2));
                price.setText(res.getString(3));
 
@@ -88,7 +87,8 @@ public class ProductController implements Initializable {
    }
 
    public static String surround(String str) {
-      if(str == null || str.equals("")) return "NULL";
+      if (str == null || str.equals(""))
+         return "NULL";
       return "'" + str.replaceAll("'", "''") + "'";
    }
 
@@ -96,7 +96,7 @@ public class ProductController implements Initializable {
    void submit(ActionEvent event) {
       StringBuilder query = new StringBuilder("");
 
-      if(status.equals("Add")) {
+      if (status.equals("Add")) {
          query.append("INSERT INTO PRODUCTS VALUES (NULL, ");
 
          query.append(surround(name.getText()));
@@ -112,8 +112,8 @@ public class ProductController implements Initializable {
          query.append("UPDATE PRODUCTS SET ");
 
          query.append("PRODUCT_NAME = " + surround(name.getText()));
-         query.append(", Category = " + surround(category.getText()));    
-         query.append(", BRAND = " + surround(brand.getText()));           
+         query.append(", Category = " + surround(category.getText()));
+         query.append(", BRAND = " + surround(brand.getText()));
          query.append(", PRICE = " + price.getText());
          query.append(", IMAGE_URL = " + surround(url.getText()));
          query.append(", DESCRIPTION = " + surround(description.getText()));
@@ -122,7 +122,7 @@ public class ProductController implements Initializable {
 
          query.append(" WHERE PRODUCT_ID = " + enterId.getText());
 
-      } else {     // delete
+      } else { // delete
          query.append("DELETE FROM PRODUCTS WHERE PRODUCT_ID = " + enterId.getText());
       }
 

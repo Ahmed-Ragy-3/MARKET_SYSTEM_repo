@@ -28,14 +28,14 @@ public class Runner extends Application {
    public static User user;
 
    public static Stage stage;
-   
+
    @FXML
-   private AnchorPane fxmlContent;  // For Scene Builder
-   private static AnchorPane content;  // Main content area
-   
+   private AnchorPane fxmlContent; // For Scene Builder
+   private static AnchorPane content; // Main content area
+
    @FXML
    private Button login, usernameButton;
-   public static Button nameButton;    // same as usernameButton
+   public static Button nameButton; // same as usernameButton
    public static Button loginButton;
 
    @FXML
@@ -45,9 +45,9 @@ public class Runner extends Application {
    @FXML
    private Label adminLabel;
    public static Label myadminLabel;
-   
+
    @FXML
-   private ListView<String> searchSuggestions = new ListView<>();   
+   private ListView<String> searchSuggestions = new ListView<>();
    @FXML
    private TextField searchBar;
 
@@ -91,19 +91,20 @@ public class Runner extends Application {
       });
 
       searchBar.setOnKeyPressed(event -> {
-         if(event.getCode() == KeyCode.ENTER) {
+         if (event.getCode() == KeyCode.ENTER) {
             search_button(null);
          }
       });
 
       categoriesFilter.getItems().setAll(Home.categoryNames);
-      
+
       categoriesFilter.setOnAction(event -> {
-         DB.execQuery("""
-            CREATE OR REPLACE VIEW TEMP_VIEW 
-            AS SELECT PRODUCT_ID, PRODUCT_NAME, PRICE, RATE, DISCOUNT, BRAND, IMAGE_URL FROM PRODUCTS WHERE CATEGORY = '%s';
-            """.formatted(categoriesFilter.getValue())
-         );
+         DB.execQuery(
+               """
+                     CREATE OR REPLACE VIEW TEMP_VIEW
+                     AS SELECT PRODUCT_ID, PRODUCT_NAME, PRICE, RATE, DISCOUNT, BRAND, IMAGE_URL FROM PRODUCTS WHERE CATEGORY = '%s';
+                     """
+                     .formatted(categoriesFilter.getValue()));
          MultipleProducts.current = DB.execQuery("SELECT * FROM TEMP_VIEW");
          categoryLabel.setVisible(false);
          display("Multiple_Products");
@@ -111,16 +112,18 @@ public class Runner extends Application {
    }
 
    public static ImageView getImageView(int id, String url) {
-      
+
       ImageView imageView = new ImageView();
-      
+
       // Load the image asynchronously
       loadImageAsync(url, imageView);
       imagesCache.putIfAbsent(id, imageView);
       return imageView;
    }
 
-   private static final java.util.concurrent.ExecutorService executorService = java.util.concurrent.Executors.newCachedThreadPool();
+   private static final java.util.concurrent.ExecutorService executorService = java.util.concurrent.Executors
+         .newCachedThreadPool();
+
    private static void loadImageAsync(String imageUrl, ImageView imageView) {
       Task<Image> loadImageTask = new Task<>() {
          @Override
@@ -140,90 +143,88 @@ public class Runner extends Application {
       // Run the task in the background
       executorService.submit(loadImageTask);
    }
-   
+
    @Override
    public void stop() {
-      executorService.shutdown();  // Shut down the thread pool on exit
+      executorService.shutdown(); // Shut down the thread pool on exit
    }
-
 
    @FXML
    void profile(ActionEvent event) {
       display("UserProfile");
    }
 
-   
    public static void setUser(String name) {
       user = new User(name);
       nameButton.setText(name);
       nameButton.setVisible(true);
       loginButton.setVisible(false);
 
-      if(user.isAdmin) {
+      if (user.isAdmin) {
          myadminChoices.getItems().addAll(new String[] {
-            "Add Product", "Edit Product", "Delete Product",
-            "Delete user account", "Review purchase history",
-            "Add Admin account"
+               "Add Product", "Edit Product", "Delete Product",
+               "Delete user account", "Review purchase history",
+               "Add Admin account"
          });
          myadminChoices.setVisible(true);
          myadminChoices.setOnAction(Runner::adminChoice);
          myadminLabel.setVisible(true);
       }
    }
-   
+
    private static void adminChoice(ActionEvent event) {
       String choice = myadminChoices.getValue();
-      if(choice.compareTo("Add Product") == 0) {
+      if (choice.compareTo("Add Product") == 0) {
          ProductController.status = "Add";
          display("Product");
-         
-      } else if(choice.compareTo("Edit Product") == 0) {
+
+      } else if (choice.compareTo("Edit Product") == 0) {
          ProductController.status = "Edit";
          display("Product");
-         
-      } else if(choice.compareTo("Delete Product") == 0) {
+
+      } else if (choice.compareTo("Delete Product") == 0) {
          ProductController.status = "Delete";
          display("Product");
 
-      } else if(choice.compareTo("Add Admin account") == 0) {
+      } else if (choice.compareTo("Add Admin account") == 0) {
          Login.fromAdmin = true;
          Login.haveAccount = false;
          display("Login");
 
       } else {
-         
+
       }
    }
-   
+
    public static void display(String fxmlScreen) {
       try {
          Parent inroot = FXMLLoader.load(Runner.class.getResource(fxmlScreen + ".fxml"));
          stage.setTitle(SHOPNAME + " - " + fxmlScreen);
          content.getChildren().setAll(inroot);
-         
+
       } catch (Exception e) {
          System.out.println("Error in display method when displaying " + fxmlScreen);
          System.out.println(e);
          e.printStackTrace();
       }
    }
-   
+
    public void OnShopping(ActionEvent event) {
       display("Home");
       categoryLabel.setVisible(true);
    }
-   
+
    public void login_button(ActionEvent event) {
       display("Login");
    }
-   
+
    @FXML
    void searching(String newText) {
 
-      if(newText.length() < typedText.length()) {
+      if (newText.length() < typedText.length()) {
          typedText.deleteCharAt(typedText.length() - 1);
          trie.removeChar();
-      }else {
+      } else {
          char recentChar = Character.toLowerCase(newText.charAt(newText.length() - 1));
          trie.addChar(recentChar);
          typedText.append(recentChar);
@@ -231,10 +232,10 @@ public class Runner extends Application {
 
       searchSuggestions.getItems().setAll(trie.suggest());
 
-      if(searchSuggestions.getItems().isEmpty()) {
+      if (searchSuggestions.getItems().isEmpty()) {
          searchSuggestions.setVisible(false);
 
-      }else {
+      } else {
          searchSuggestions.setVisible(true);
       }
 
@@ -242,29 +243,31 @@ public class Runner extends Application {
 
    public void search_button(ActionEvent event) {
       // Implement the functionality to display the appropriate screen
-      if(searchSuggestions.getItems().size() == 1) {
-         // display("");   // omar page
-      }else {
+      if (searchSuggestions.getItems().size() == 1) {
+         // display(""); // omar page
+      } else {
          // display all items
          String str_ids = trie.stackTrieNodes.peek().ids.toString().replace('[', '(').replace(']', ')');
-         DB.execQuery("""
-            CREATE OR REPLACE VIEW TEMP_VIEW AS
-            SELECT PRODUCT_ID, PRODUCT_NAME, PRICE, RATE, DISCOUNT, BRAND, IMAGE_URL FROM PRODUCTS WHERE PRODUCT_ID IN 
-         """ + str_ids);
+         DB.execQuery(
+               """
+                        CREATE OR REPLACE VIEW TEMP_VIEW AS
+                        SELECT PRODUCT_ID, PRODUCT_NAME, PRICE, RATE, DISCOUNT, BRAND, IMAGE_URL FROM PRODUCTS WHERE PRODUCT_ID IN
+                     """
+                     + str_ids);
          MultipleProducts.current = DB.execQuery("SELECT * FROM TEMP_VIEW");
          display("Multiple_Products");
       }
       searchSuggestions.getItems().clear();
       searchSuggestions.setVisible(false);
    }
-   
+
    public static void showAlert(String title, String content) {
       Alert alert = new Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
       alert.setTitle(title);
       alert.setContentText(content);
       alert.showAndWait();
    }
-   
+
    @Override
    public void start(Stage primaryStage) throws Exception {
       stage = primaryStage;
@@ -280,8 +283,8 @@ public class Runner extends Application {
    public static void main(String[] args) {
       user = null;
       trie = new ProductsTrie();
-      trie.start();      // thread
+      trie.start(); // thread
       launch(args);
    }
-   
+
 }

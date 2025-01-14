@@ -19,7 +19,7 @@ public class Login {
    @FXML
    private Button submit, cna;
    @FXML
-   private Button cna1;  // Sign in ?
+   private Button cna1; // Sign in ?
    @FXML
    private TextField username, password1, password2;
    @FXML
@@ -27,10 +27,10 @@ public class Login {
 
    @FXML
    public void initialize() {
-      if(fromAdmin) {
+      if (fromAdmin) {
          submit.setText("Create");
          submit.setLayoutY(submit.getLayoutY() + 90);
-   
+
          confirm.setVisible(true);
          cna.setVisible(false);
          cna1.setVisible(false);
@@ -40,20 +40,20 @@ public class Login {
 
    @FXML
    void create_new_account(ActionEvent event) {
-      if(haveAccount) {
+      if (haveAccount) {
          haveAccount = false;
          submit.setText("Create");
          submit.setLayoutY(submit.getLayoutY() + 90);
-   
+
          confirm.setVisible(true);
          cna.setVisible(false);
          cna1.setVisible(true);
          password2.setVisible(true);
-      }else {
+      } else {
          haveAccount = true;
          submit.setText("Sign in");
          submit.setLayoutY(submit.getLayoutY() - 90);
-   
+
          confirm.setVisible(false);
          cna1.setVisible(true);
          cna.setVisible(false);
@@ -69,43 +69,43 @@ public class Login {
       String savedPassword = "";
       try {
          exist = res.next();
-         if(exist) {
+         if (exist) {
             savedPassword = res.getString("PASSWORD");
          }
       } catch (SQLException e) {
          System.out.println("SQL EXCEPTION in submit_button method");
       }
 
-      if(haveAccount) {
-         if(!exist) {
+      if (haveAccount) {
+         if (!exist) {
             Runner.showAlert("Invalid Username", "Username is not found\nEnter Valid Username");
             return;
          }
 
-         if(!savedPassword.equals(password1.getText())) {
+         if (!savedPassword.equals(password1.getText())) {
             Runner.showAlert("Invalid Password", "Password provided didn't match your username");
             return;
          }
 
-      }else {
+      } else {
 
-         if(exist) {
+         if (exist) {
             System.out.println("Username is used before");
             Runner.showAlert("Used username", "This username is used before\nEnter another username");
             return;
          }
-         if(!password1.getText().equals(password2.getText())) {
+         if (!password1.getText().equals(password2.getText())) {
             System.out.println("password1 != password2");
-            Runner.showAlert("Passwords don't match", 
-            "Passwords don't match\nPlease confirm password correctly");
+            Runner.showAlert("Passwords don't match",
+                  "Passwords don't match\nPlease confirm password correctly");
             return;
          }
 
          User.insertUser(name, password1.getText());
       }
 
-      if(fromAdmin) {
-         if(User.isAdmin(name)) {
+      if (fromAdmin) {
+         if (User.isAdmin(name)) {
             Runner.showAlert("Used Name", "Name is used before\nEnter another username");
             return;
          }
@@ -116,17 +116,17 @@ public class Login {
             writer.close();
 
             System.out.println(name + " added successfully");
-        } catch (IOException e) {
+         } catch (IOException e) {
             System.out.println("An error occurred in adding admin");
             // e.printStackTrace();
-        }
-      }else {
+         }
+      } else {
          Runner.setUser(name);
       }
       Runner.display("Home");
    }
 
    public static void main(String[] args) {
-      
+
    }
 }
